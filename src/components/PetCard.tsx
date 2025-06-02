@@ -1,0 +1,43 @@
+import type { Pet } from '@/types/pet';
+import { Link } from 'react-router-dom';
+
+interface PetCardProps {
+  pet: Pet;
+}
+
+const PetCard = ({ pet }: PetCardProps) => {
+  const { name, description, image, breed, age, size, color } = pet;
+
+  return (
+    <Link to={`/pets/${pet.id}`} className="block hover:opacity-90">
+      <div className="border rounded-lg p-4 bg-white shadow">
+        <h2 className="text-xl font-semibold">{name}</h2>
+
+        {image && (
+          <img
+            src={image}
+            alt={`${name} the ${breed}`}
+            className="w-full h-48 object-cover my-2 rounded"
+          />
+        )}
+
+        <p className="text-sm text-gray-700">{description}</p>
+
+        <div className="text-xs text-gray-600 mt-2">
+          <p>
+            <span className="font-semibold">Breed:</span> {breed}
+          </p>
+          <p>
+            <span className="font-semibold">Age:</span> {age}
+          </p>
+          <p>
+            <span className="font-semibold">Size:</span> {size} —{' '}
+            <span className="font-semibold">Color:</span> {color}
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default PetCard;
