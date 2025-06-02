@@ -1,4 +1,5 @@
 import { loadThemePreference } from './utils/theme';
+import RevealProvider from '@/context/RevealProvider';
 loadThemePreference(); // 🔥 call before React renders anything
 
 import React from 'react';
@@ -10,7 +11,9 @@ import { BrowserRouter } from 'react-router-dom';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <RevealProvider revealImages={true}>
+        <App />
+      </RevealProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
