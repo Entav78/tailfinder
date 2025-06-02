@@ -6,7 +6,11 @@ import { useContext } from 'react';
 import { RevealContext } from '@/context/RevealContext';
 
 const HomePage = () => {
-  const { setRevealImages } = useContext(RevealContext)!;
+  const context = useContext(RevealContext);
+  if (!context) throw new Error('Missing RevealContext');
+
+  const { revealImages, setRevealImages } = context;
+
   const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,10 +28,10 @@ const HomePage = () => {
     <div className="p-4 max-w-4xl mx-auto">
       <div className="flex justify-end mb-4">
         <button
-          className="bg-primary text-white px-4 py-2 rounded shadow hover:bg-primary-dark transition"
-          onClick={() => setRevealImages(true)}
+          onClick={() => setRevealImages(!revealImages)}
+          className="mb-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-700 transition"
         >
-          Reveal All Images
+          {revealImages ? 'Hide Images' : 'Reveal All Images'}
         </button>
       </div>
 

@@ -8,13 +8,15 @@ interface PetCardProps {
 }
 
 const PetCard = ({ pet }: PetCardProps) => {
-  const revealImages = useContext(RevealContext);
+  const context = useContext(RevealContext);
 
-  if (revealImages === undefined) {
+  if (!context) {
     throw new Error(
       'RevealContext is missing. Did you forget to wrap in <RevealProvider>?'
     );
   }
+
+  const { revealImages } = context;
 
   const { id, name, description, image, breed, age, size, color } = pet;
 

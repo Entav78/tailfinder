@@ -1,22 +1,20 @@
 import { useState } from 'react';
-import { RevealContext } from './RevealContext';
 import type { ReactNode } from 'react';
+import { RevealContext } from './RevealContext';
 
 interface RevealProviderProps {
   children: ReactNode;
-  revealImages?: boolean;
+  initialReveal?: boolean;
 }
 
 const RevealProvider = ({
   children,
-  revealImages = false,
+  initialReveal = false,
 }: RevealProviderProps) => {
-  const [reveal, setReveal] = useState(revealImages);
+  const [revealImages, setRevealImages] = useState(initialReveal);
 
   return (
-    <RevealContext.Provider
-      value={{ revealImages: reveal, setRevealImages: setReveal }}
-    >
+    <RevealContext.Provider value={{ revealImages, setRevealImages }}>
       {children}
     </RevealContext.Provider>
   );

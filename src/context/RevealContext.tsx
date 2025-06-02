@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
-interface RevealContextType {
+interface RevealContextValue {
   revealImages: boolean;
   setRevealImages: (value: boolean) => void;
 }
 
-export const RevealContext = createContext<RevealContextType | undefined>(
+export const RevealContext = createContext<RevealContextValue | undefined>(
   undefined
 );
