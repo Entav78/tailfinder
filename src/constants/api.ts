@@ -16,3 +16,4 @@ export function getRegisterUrl(): string {
 export function getLoginUrl(): string {
   return `${API_AUTH}/login`;
 }
+

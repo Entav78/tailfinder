@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getRegisterUrl } from '@/constants/api';
+import toast from 'react-hot-toast';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -26,12 +27,16 @@ const RegisterPage = () => {
         throw new Error(data.errors?.[0]?.message || 'Registration failed');
       }
 
+      toast.success('Registration successful! Please log in.');
+
       navigate('/login');
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
+        toast.error(err.message);
       } else {
         setError('An unexpected error occurred.');
+        toast.error('An unexpected error occurred.');
       }
     }
   };
