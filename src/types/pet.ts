@@ -6,5 +6,8 @@ export interface Pet {
   size: string;
   color: string;
   description: string;
-  image: string;
+  image?: {
+    url: string;
+    alt?: string;
+  };
 }

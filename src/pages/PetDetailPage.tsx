@@ -23,13 +23,19 @@ const PetDetailPage = () => {
   return (
     <section className="p-4 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">{pet.name}</h1>
-      {pet.image && (
+
+      {pet.image?.url ? (
         <img
-          src={pet.image}
-          alt={`${pet.name} the ${pet.breed}`}
+          src={pet.image.url}
+          alt={pet.image.alt || `${pet.name} the ${pet.breed || 'pet'}`}
           className="w-full h-auto rounded shadow mb-4"
         />
+      ) : (
+        <div className="w-full h-64 bg-gray-200 rounded shadow mb-4 flex items-center justify-center text-gray-500 text-sm">
+          Image not available
+        </div>
       )}
+
       <p className="mb-2">
         <strong>Breed:</strong> {pet.breed}
       </p>

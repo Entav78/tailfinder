@@ -86,6 +86,9 @@ const Header = () => {
             <Link to="/profile" className="hover:underline">
               Profile
             </Link>
+            <Link to="/register" className="hover:underline">
+              Register
+            </Link>
             <ThemeToggle />
           </nav>
         </div>
@@ -133,6 +136,16 @@ const Header = () => {
               className="hover:underline"
             >
               Profile
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              to="/register"
+              onClick={() => setMenuOpen(false)}
+              className="hover:underline"
+            >
+              Register
             </Link>
           </li>
 

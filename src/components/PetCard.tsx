@@ -19,6 +19,7 @@ const PetCard = ({ pet }: PetCardProps) => {
   const { revealImages } = context;
 
   const { id, name, description, image, breed, age, size, color } = pet;
+  console.log('🐾 Image URL:', image);
 
   return (
     <Link to={`/pets/${id}`} className="block hover:opacity-90">
@@ -26,13 +27,11 @@ const PetCard = ({ pet }: PetCardProps) => {
         <h2 className="text-xl font-semibold">{name}</h2>
 
         {revealImages ? (
-          image && (
-            <img
-              src={image}
-              alt={`${name} the ${breed}`}
-              className="w-full h-48 object-cover my-2 rounded"
-            />
-          )
+          <img
+            src={image?.url || '/img/placeholder.jpg'}
+            alt={image?.alt || `${name} the ${breed || 'pet'}`}
+            className="w-full h-48 object-cover my-2 rounded"
+          />
         ) : (
           <div className="w-full h-48 my-2 bg-gray-200 rounded flex items-center justify-center text-sm text-gray-500">
             Image hidden
