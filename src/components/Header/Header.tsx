@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 
-// import logo from '@/assets/tailfinder-logo.png';
-// ⬇️ Temp fallback
+import logo from '@/assets/img/logo-tailfinder.png';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  // ✅ Scroll lock
+
   useEffect(() => {
     if (menuOpen) {
       document.body.classList.add('overflow-hidden');
@@ -15,36 +14,33 @@ const Header = () => {
       document.body.classList.remove('overflow-hidden');
     }
 
-    // Just in case: remove it when component unmounts
     return () => document.body.classList.remove('overflow-hidden');
   }, [menuOpen]);
 
   return (
     <>
       <header className="bg-header text-white p-4 shadow-md relative z-50">
-        {/* Logo + Hamburger */}
         <div className="flex items-center justify-between w-full">
-          {/* Logo left on large screens, centered on small screens */}
           <div className="flex-1 sm:flex-none sm:mr-4 flex justify-center sm:justify-start">
             <img
-              src="https://placekitten.com/100/100"
+              src={logo}
               alt="TailFinder Logo"
               className="h-20 w-auto rounded-full"
             />
           </div>
 
-          {/* Hamburger button */}
+          {/* ✅ Bigger hamburger button */}
           <button
-            className="sm:hidden relative w-6 h-6 mr-2"
+            className="sm:hidden relative w-12 h-12 p-2 mr-2"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            {/* Hamburger */}
+            {/* Hamburger Icon */}
             <svg
-              className={`absolute inset-0 w-6 h-6 text-white transform transition-all duration-300 ${
-                menuOpen
-                  ? 'opacity-0 scale-75 rotate-45'
-                  : 'opacity-100 scale-100'
+              className={`w-8 h-8 text-white transform transition-all duration-300 ${
+                menuOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-125'
               }`}
               fill="none"
               stroke="currentColor"
@@ -58,12 +54,10 @@ const Header = () => {
               />
             </svg>
 
-            {/* X icon */}
+            {/* X Icon */}
             <svg
-              className={`absolute inset-0 w-6 h-6 text-white transform transition-all duration-300 ${
-                menuOpen
-                  ? 'opacity-100 scale-100 rotate-0'
-                  : 'opacity-0 scale-75 rotate-45'
+              className={`w-8 h-8 text-white transform transition-all duration-300 ${
+                menuOpen ? 'opacity-100 scale-125' : 'opacity-0 scale-90'
               }`}
               fill="none"
               stroke="currentColor"
@@ -78,13 +72,16 @@ const Header = () => {
             </svg>
           </button>
 
-          {/* Navigation (desktop only) */}
+          {/* Desktop Nav */}
           <nav className="hidden sm:flex gap-6 text-lg font-medium pr-4">
             <Link to="/" className="hover:underline">
               Home
             </Link>
             <Link to="/profile" className="hover:underline">
               Profile
+            </Link>
+            <Link to="/manage" className="hover:underline">
+              Manage
             </Link>
             <Link to="/register" className="hover:underline">
               Register
@@ -94,17 +91,18 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Slide-in Sidebar (always in DOM) */}
+      {/* Mobile Slide-in Menu */}
       <div
         className={`fixed top-0 right-0 h-full w-full bg-header text-white shadow-lg transform transition-transform duration-300 z-50 sm:hidden ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
+        id="mobile-menu"
       >
         <div className="flex justify-between items-center px-4 pt-6 pb-4 border-b border-white">
           <span className="text-lg font-semibold">Menu</span>
           <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -138,7 +136,15 @@ const Header = () => {
               Profile
             </Link>
           </li>
-
+          <li>
+            <Link
+              to="/manage"
+              onClick={() => setMenuOpen(false)}
+              className="hover:underline"
+            >
+              Manage
+            </Link>
+          </li>
           <li>
             <Link
               to="/register"
@@ -148,7 +154,6 @@ const Header = () => {
               Register
             </Link>
           </li>
-
           <li className="pt-4 border-t border-white">
             <ThemeToggle onClickDone={() => setMenuOpen(false)} />
           </li>

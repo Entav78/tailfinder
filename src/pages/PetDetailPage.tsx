@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPetById } from '@/api/fetchPets';
 import type { Pet } from '@/types/pet';
+import { Link } from 'react-router-dom';
 
 const PetDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,6 +52,12 @@ const PetDetailPage = () => {
       <p>
         <strong>Description:</strong> {pet.description}
       </p>
+      <Link
+        to={`/manage/${pet.id}`}
+        className="mt-6 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+      >
+        Edit Pet
+      </Link>
     </section>
   );
 };
