@@ -19,9 +19,10 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-header text-white p-4 shadow-md relative z-50">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex-1 sm:flex-none sm:mr-4 flex justify-center sm:justify-start">
+      <header className="bg-header text-white px-4 py-6 shadow-md relative z-50">
+        <div className="relative flex items-center justify-between w-full">
+          {/* ✅ Logo for small screens (absolute + centered) */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 sm:hidden">
             <img
               src={logo}
               alt="TailFinder Logo"
@@ -29,9 +30,18 @@ const Header = () => {
             />
           </div>
 
-          {/* ✅ Bigger hamburger button */}
+          {/* ✅ Logo for larger screens */}
+          <div className="hidden sm:block">
+            <img
+              src={logo}
+              alt="TailFinder Logo"
+              className="h-20 w-auto rounded-full"
+            />
+          </div>
+
+          {/* Hamburger */}
           <button
-            className="sm:hidden relative w-12 h-12 p-2 mr-2"
+            className="sm:hidden relative w-12 h-12 p-2 ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
