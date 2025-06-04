@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from '@/pages/RegisterPage';
 import { Toaster } from 'react-hot-toast';
 import ManagePetPage from './pages/ManagePetPage';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 function App() {
   return (
@@ -14,8 +15,22 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/pets/:id" element={<PetDetailPage />} />
-          <Route path="/manage" element={<ManagePetPage />} /> {/* Add new */}
-          <Route path="/manage/:id" element={<ManagePetPage />} /> {/* Edit */}
+          <Route
+            path="/manage"
+            element={
+              <ProtectedRoute>
+                <ManagePetPage />
+              </ProtectedRoute>
+            }
+          />{' '}
+          <Route
+            path="/manage/:id"
+            element={
+              <ProtectedRoute>
+                <ManagePetPage />
+              </ProtectedRoute>
+            }
+          />{' '}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>

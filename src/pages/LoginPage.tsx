@@ -4,9 +4,12 @@ import { getLoginUrl } from '@/constants/api';
 import type { LoginResponse } from '@/types/loginResponse';
 import type { ErrorResponse } from '@/types/errorResponse';
 import toast from 'react-hot-toast';
+import { useAuthStore } from '@/store/authStore';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -31,12 +34,11 @@ const LoginPage = () => {
 
       const data = json as LoginResponse;
 
-      localStorage.setItem('authToken', data.data.accessToken);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ name: data.data.name, email: data.data.email })
-      );
-      localStorage.setItem('userName', data.data.name);
+      login({
+        name: data.data.name,
+        email: data.data.email,
+        accessToken: data.data.accessToken,
+      });
 
       toast.success('Logged in successfully!');
 

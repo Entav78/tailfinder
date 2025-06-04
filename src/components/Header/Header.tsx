@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
-
 import logo from '@/assets/img/logo-tailfinder.png';
+import LogoutButton from '@/components/LogoutButton';
+import { useAuthStore } from '@/store/authStore';
 
 const Header = () => {
+  const accessToken = useAuthStore((state) => state.accessToken);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -23,20 +25,24 @@ const Header = () => {
         <div className="relative flex items-center justify-between w-full">
           {/* ✅ Logo for small screens (absolute + centered) */}
           <div className="absolute left-1/2 transform -translate-x-1/2 sm:hidden">
-            <img
-              src={logo}
-              alt="TailFinder Logo"
-              className="h-20 w-auto rounded-full"
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                alt="TailFinder Logo"
+                className="h-20 w-auto rounded-full"
+              />
+            </Link>
           </div>
 
           {/* ✅ Logo for larger screens */}
           <div className="hidden sm:block">
-            <img
-              src={logo}
-              alt="TailFinder Logo"
-              className="h-20 w-auto rounded-full"
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                alt="TailFinder Logo"
+                className="h-20 w-auto rounded-full"
+              />
+            </Link>
           </div>
 
           {/* Hamburger */}
@@ -93,9 +99,19 @@ const Header = () => {
             <Link to="/manage" className="hover:underline">
               Manage
             </Link>
-            <Link to="/register" className="hover:underline">
-              Register
-            </Link>
+            {accessToken ? (
+              <LogoutButton />
+            ) : (
+              <>
+                <Link to="/login" className="hover:underline">
+                  Login
+                </Link>
+                <Link to="/register" className="hover:underline">
+                  Register
+                </Link>
+              </>
+            )}
+
             <ThemeToggle />
           </nav>
         </div>
@@ -155,15 +171,33 @@ const Header = () => {
               Manage
             </Link>
           </li>
-          <li>
-            <Link
-              to="/register"
-              onClick={() => setMenuOpen(false)}
-              className="hover:underline"
-            >
-              Register
-            </Link>
-          </li>
+          {accessToken ? (
+            <li>
+              <LogoutButton onClickDone={() => setMenuOpen(false)} />
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link
+                  to="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:underline"
+                >
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/register"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:underline"
+                >
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
+
           <li className="pt-4 border-t border-white">
             <ThemeToggle onClickDone={() => setMenuOpen(false)} />
           </li>
