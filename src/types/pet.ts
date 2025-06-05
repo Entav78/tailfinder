@@ -4,14 +4,14 @@ export interface Pet {
   species: string;
   breed: string;
   age: number;
+  gender: string;
   size: string;
   color: string;
   description: string;
-  image?: {
+  location: string;
+  adoptionStatus?: string; // optional – defaults to "Available"
+  image: {
     url: string;
-    alt?: string;
-  };
-  owner?: {
-    name: string;
+    alt: string;
   };
 }

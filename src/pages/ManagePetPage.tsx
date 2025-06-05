@@ -15,9 +15,12 @@ const ManagePetPage = () => {
     species: '',
     breed: '',
     age: 0,
+    gender: '',
     size: '',
     color: '',
     description: '',
+    adoptionStatus: 'Available', // optional, men setter default
+    location: '',
     image: {
       url: '',
       alt: '',
@@ -66,8 +69,8 @@ const ManagePetPage = () => {
     // Fjern id ved POST
     const payload = id
       ? formData
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      : (({ id: _, ...rest }: Pet): Omit<Pet, 'id'> => rest)(formData);
+      : // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        (({ id: _, ...rest }: Pet): Omit<Pet, 'id'> => rest)(formData);
 
     try {
       const res = await fetch(url, {
@@ -133,6 +136,15 @@ const ManagePetPage = () => {
           className="w-full p-2 border rounded"
         />
         <input
+          name="gender"
+          placeholder="Gender (e.g., male, female)"
+          value={formData.gender}
+          onChange={handleChange}
+          required
+          className="w-full p-2 border rounded"
+        />
+
+        <input
           name="age"
           type="number"
           placeholder="Age"
@@ -165,6 +177,14 @@ const ManagePetPage = () => {
           className="w-full p-2 border rounded"
         />
         <input
+          name="location"
+          placeholder="Location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+          className="w-full p-2 border rounded"
+        />
+        <input
           name="image.url"
           placeholder="Image URL"
           value={formData.image?.url || ''}
@@ -194,6 +214,14 @@ const ManagePetPage = () => {
           }
           className="w-full p-2 border rounded"
         />
+        <input
+          name="adoptionStatus"
+          placeholder="Adoption Status"
+          value={formData.adoptionStatus}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+        />
+
         <button
           type="submit"
           disabled={loading}
