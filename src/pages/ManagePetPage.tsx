@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '@/store/authStore';
 import toast from 'react-hot-toast';
 import { getPetByIdUrl, getPetsUrl } from '@/constants/api';
 import type { Pet } from '@/types/pet';
 
 const ManagePetPage = () => {
-  const { id } = useParams(); // ID is present if editing
+  const { id } = useParams(); // Bruk kun denne, ikke destrukturer på nytt senere
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<Pet>({
     id: '',
     name: '',
+    species: '',
     breed: '',
     age: 0,
     size: '',
@@ -58,8 +60,14 @@ const ManagePetPage = () => {
 
     const url = id ? getPetByIdUrl(id) : getPetsUrl();
     const method = id ? 'PUT' : 'POST';
-    const token = localStorage.getItem('authToken');
+    const token = useAuthStore.getState().accessToken;
     const apiKey = import.meta.env.VITE_API_KEY;
+
+    // Fjern id ved POST
+    const payload = id
+      ? formData
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      : (({ id: _, ...rest }: Pet): Omit<Pet, 'id'> => rest)(formData);
 
     try {
       const res = await fetch(url, {
@@ -70,15 +78,16 @@ const ManagePetPage = () => {
           'X-Noroff-API-Key': apiKey,
         },
         body: JSON.stringify({
-          ...formData,
-          image: formData.image?.url ? formData.image : undefined,
+          ...payload,
+          image: payload.image?.url ? payload.image : undefined,
         }),
       });
 
       const result = await res.json();
 
-      if (!res.ok)
+      if (!res.ok) {
         throw new Error(result.errors?.[0]?.message || 'Failed to save pet');
+      }
 
       toast.success(
         id ? 'Pet updated successfully!' : 'Pet added successfully!'
@@ -116,6 +125,14 @@ const ManagePetPage = () => {
           className="w-full p-2 border rounded"
         />
         <input
+          name="species"
+          placeholder="Species (e.g., dog, cat)"
+          value={formData.species}
+          onChange={handleChange}
+          required
+          className="w-full p-2 border rounded"
+        />
+        <input
           name="age"
           type="number"
           placeholder="Age"
@@ -124,7 +141,6 @@ const ManagePetPage = () => {
           required
           className="w-full p-2 border rounded"
         />
-
         <input
           name="size"
           placeholder="Size"
@@ -157,7 +173,7 @@ const ManagePetPage = () => {
               ...prev,
               image: {
                 url: e.target.value,
-                alt: prev.image?.alt || '', // fallback if undefined
+                alt: prev.image?.alt || '',
               },
             }))
           }
@@ -171,14 +187,13 @@ const ManagePetPage = () => {
             setFormData((prev) => ({
               ...prev,
               image: {
-                url: prev.image?.url || '', // fallback if undefined
+                url: prev.image?.url || '',
                 alt: e.target.value,
               },
             }))
           }
           className="w-full p-2 border rounded"
         />
-
         <button
           type="submit"
           disabled={loading}

@@ -7,6 +7,7 @@ import RegisterPage from '@/pages/RegisterPage';
 import { Toaster } from 'react-hot-toast';
 import ManagePetPage from './pages/ManagePetPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -15,6 +16,14 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/pets/:id" element={<PetDetailPage />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/manage"
             element={
