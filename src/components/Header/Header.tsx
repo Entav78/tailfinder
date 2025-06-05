@@ -6,16 +6,11 @@ import LogoutButton from '@/components/LogoutButton';
 import { useAuthStore } from '@/store/authStore';
 
 const Header = () => {
-  const accessToken = useAuthStore((state) => state.accessToken);
+  const { accessToken, user } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-    }
-
+    document.body.classList.toggle('overflow-hidden', menuOpen);
     return () => document.body.classList.remove('overflow-hidden');
   }, [menuOpen]);
 
@@ -23,7 +18,7 @@ const Header = () => {
     <>
       <header className="bg-header text-white px-4 py-6 shadow-md relative z-50">
         <div className="relative flex items-center justify-between w-full">
-          {/* ✅ Logo for small screens (absolute + centered) */}
+          {/* ✅ Logo small screens */}
           <div className="absolute left-1/2 transform -translate-x-1/2 sm:hidden">
             <Link to="/">
               <img
@@ -34,7 +29,7 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* ✅ Logo for larger screens */}
+          {/* ✅ Logo large screens */}
           <div className="hidden sm:block">
             <Link to="/">
               <img
@@ -45,7 +40,7 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Hamburger */}
+          {/* ✅ Hamburger */}
           <button
             className="sm:hidden relative w-12 h-12 p-2 ml-auto"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -53,7 +48,6 @@ const Header = () => {
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
-            {/* Hamburger Icon */}
             <svg
               className={`w-8 h-8 text-white transform transition-all duration-300 ${
                 menuOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-125'
@@ -69,8 +63,6 @@ const Header = () => {
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
-
-            {/* X Icon */}
             <svg
               className={`w-8 h-8 text-white transform transition-all duration-300 ${
                 menuOpen ? 'opacity-100 scale-125' : 'opacity-0 scale-90'
@@ -88,8 +80,8 @@ const Header = () => {
             </svg>
           </button>
 
-          {/* Desktop Nav */}
-          <nav className="hidden sm:flex gap-6 text-lg font-medium pr-4">
+          {/* ✅ Desktop Nav */}
+          <nav className="hidden sm:flex gap-6 text-lg font-medium pr-4 items-center">
             <Link to="/" className="hover:underline">
               Home
             </Link>
@@ -99,6 +91,8 @@ const Header = () => {
             <Link to="/manage" className="hover:underline">
               Manage
             </Link>
+            <ThemeToggle />
+
             {accessToken ? (
               <LogoutButton />
             ) : (
@@ -111,18 +105,22 @@ const Header = () => {
                 </Link>
               </>
             )}
-
-            <ThemeToggle />
           </nav>
         </div>
+        {/* ✅ Logged in user (desktop only) */}
+        {user && (
+          <div className="hidden sm:flex justify-end text-sm text-white/70 mt-1 pr-4">
+            Logged in as <span className="font-semibold ml-1">{user.name}</span>
+          </div>
+        )}
       </header>
 
-      {/* Mobile Slide-in Menu */}
+      {/* ✅ Mobile Menu */}
       <div
+        id="mobile-menu"
         className={`fixed top-0 right-0 h-full w-full bg-header text-white shadow-lg transform transition-transform duration-300 z-50 sm:hidden ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        id="mobile-menu"
       >
         <div className="flex justify-between items-center px-4 pt-6 pb-4 border-b border-white">
           <span className="text-lg font-semibold">Menu</span>
@@ -171,6 +169,7 @@ const Header = () => {
               Manage
             </Link>
           </li>
+
           {accessToken ? (
             <li>
               <LogoutButton onClickDone={() => setMenuOpen(false)} />
@@ -201,6 +200,13 @@ const Header = () => {
           <li className="pt-4 border-t border-white">
             <ThemeToggle onClickDone={() => setMenuOpen(false)} />
           </li>
+
+          {/* ✅ Logged in user (mobile) */}
+          {user?.name && (
+            <li className="pt-2 text-sm text-gray-300">
+              Logged in as <span className="font-semibold">{user.name}</span>
+            </li>
+          )}
         </ul>
       </div>
     </>
