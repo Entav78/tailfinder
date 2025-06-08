@@ -16,5 +16,16 @@ export interface Pet {
   };
   owner?: {
     name: string;
+    email?: string;
   };
+}
+
+export function isOwner(pet: Pet, currentUserName?: string): boolean {
+  return pet.owner?.name === currentUserName;
+}
+
+{
+  /* for later use if I need it
+export type { Pet };
+export { isOwner };*/
 }

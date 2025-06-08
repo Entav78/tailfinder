@@ -4,6 +4,7 @@ import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/Button/Button';
+import { isOwner } from '@/types/pet';
 
 interface PetCardProps {
   pet: Pet;
@@ -22,7 +23,7 @@ const PetCard = ({ pet }: PetCardProps) => {
   const { id, name, description, image, breed, age, size, color, owner } = pet;
 
   const currentUser = useAuthStore((state) => state.user?.name);
-  const isOwner = owner?.name === currentUser;
+  const ownerCheck = isOwner(pet, currentUser);
 
   return (
     <article className="bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg">
@@ -54,11 +55,14 @@ const PetCard = ({ pet }: PetCardProps) => {
         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
           {description}
         </p>
+        {currentUser && owner?.name && (
+          <p className="text-sm text-gray-500 mt-2">Owner: {owner.name}</p>
+        )}
       </Link>
 
       <div className="mt-4 flex gap-2">
         <Button variant="primary">Adopt</Button>
-        {isOwner && <Button variant="secondary">Edit</Button>}
+        {ownerCheck && <Button variant="secondary">Edit</Button>}
       </div>
     </article>
   );
