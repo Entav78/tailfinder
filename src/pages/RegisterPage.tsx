@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getRegisterUrl } from '@/constants/api';
 import toast from 'react-hot-toast';
+import { Button } from '@/components/Button/Button';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -70,12 +71,9 @@ const RegisterPage = () => {
         />
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
+        <Button type="submit" variant="primary">
           Register
-        </button>
+        </Button>
       </form>
     </section>
   );

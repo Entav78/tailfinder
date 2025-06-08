@@ -14,4 +14,7 @@ export interface Pet {
     url: string;
     alt: string;
   };
+  owner?: {
+    name: string;
+  };
 }

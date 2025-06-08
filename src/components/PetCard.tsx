@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { RevealContext } from '@/context/RevealContext';
 import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '@/store/authStore';
+import { Button } from '@/components/Button/Button';
 
 interface PetCardProps {
   pet: Pet;
@@ -17,43 +19,48 @@ const PetCard = ({ pet }: PetCardProps) => {
   }
 
   const { revealImages } = context;
+  const { id, name, description, image, breed, age, size, color, owner } = pet;
 
-  const { id, name, description, image, breed, age, size, color } = pet;
-  console.log('🐾 Image URL:', image);
+  const currentUser = useAuthStore((state) => state.user?.name);
+  const isOwner = owner?.name === currentUser;
 
   return (
-    <Link to={`/pets/${id}`} className="block hover:opacity-90">
-      <div className="border rounded-lg p-4 bg-white shadow">
-        <h2 className="text-xl font-semibold">{name}</h2>
-
-        {revealImages ? (
+    <article className="bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg">
+      <Link to={`/pets/${id}`} className="block group">
+        {revealImages && image?.url ? (
           <img
-            src={image?.url || '/img/placeholder.jpg'}
-            alt={image?.alt || `${name} the ${breed || 'pet'}`}
-            className="w-full h-48 object-cover my-2 rounded"
+            src={image.url}
+            alt={image.alt || `${name} the ${breed || 'pet'}`}
+            className="w-full h-48 object-cover rounded mb-4 group-hover:opacity-90 transition"
           />
         ) : (
-          <div className="w-full h-48 my-2 bg-gray-200 rounded flex items-center justify-center text-sm text-gray-500">
-            Image hidden
+          <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center rounded mb-4">
+            <p className="text-gray-500 dark:text-gray-300 text-sm">
+              Image hidden
+            </p>
           </div>
         )}
 
-        <p className="text-sm text-gray-700">{description}</p>
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-1 group-hover:underline">
+          {name}
+        </h2>
 
-        <div className="text-xs text-gray-600 mt-2">
-          <p>
-            <span className="font-semibold">Breed:</span> {breed}
-          </p>
-          <p>
-            <span className="font-semibold">Age:</span> {age}
-          </p>
-          <p>
-            <span className="font-semibold">Size:</span> {size} —{' '}
-            <span className="font-semibold">Color:</span> {color}
-          </p>
-        </div>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{breed}</p>
+
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
+          Age: {age} • Size: {size} • Color: {color}
+        </p>
+
+        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+          {description}
+        </p>
+      </Link>
+
+      <div className="mt-4 flex gap-2">
+        <Button variant="primary">Adopt</Button>
+        {isOwner && <Button variant="secondary">Edit</Button>}
       </div>
-    </Link>
+    </article>
   );
 };
 

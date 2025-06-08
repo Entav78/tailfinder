@@ -8,10 +8,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        header: "#53423C",
-        primary: "#0f5800",
-        secondary: "#ffffff",
         background: "#f7f7f7",
+        header: "#53423C",
+        'header-hover': '#6c564f',
+        primary: "#53423C",
+        'primary-hover': '#6c564f',
+        secondary: '#A68B7C',
+        'secondary-hover': '#7a5d4c',
+        reveal: '#c48b4c',
+        'reveal-hover': '#eab308',
+        
+        dark: {
+          background: "#1a1a1a",
+          header: "#3a2e2a",
+          primary: "#126c16",
+        }
       },
     },
   },

@@ -38,16 +38,6 @@ const ManagePetPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.data) {
-          const currentUser = useAuthStore.getState().user?.name;
-
-          // Check if current user is the owner
-          if (data.data.owner && data.data.owner !== currentUser) {
-            toast.error("You don't have permission to edit this pet.");
-            navigate('/');
-            return; // stop execution
-          }
-
-          // User is allowed
           setFormData(data.data);
         } else {
           toast.error('Could not fetch pet details');
@@ -55,7 +45,7 @@ const ManagePetPage = () => {
       })
       .catch(() => toast.error('Something went wrong'))
       .finally(() => setLoading(false));
-  }, [id, navigate]);
+  }, [id]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

@@ -5,6 +5,7 @@ import type { LoginResponse } from '@/types/loginResponse';
 import type { ErrorResponse } from '@/types/errorResponse';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
+import { Button } from '@/components/Button/Button';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -73,12 +74,9 @@ const LoginPage = () => {
           required
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-        >
+        <Button type="submit" variant="primary">
           Login
-        </button>
+        </Button>
       </form>
     </section>
   );

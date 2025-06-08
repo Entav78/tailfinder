@@ -4,6 +4,7 @@ import { fetchPets } from '@/api/fetchPets';
 import type { Pet } from '@/types/pet';
 import { useContext } from 'react';
 import { RevealContext } from '@/context/RevealContext';
+import { Button } from '@/components/Button/Button';
 
 const HomePage = () => {
   const context = useContext(RevealContext);
@@ -27,12 +28,9 @@ const HomePage = () => {
   return (
     <div className="p-4 max-w-4xl mx-auto">
       <div className="flex justify-end mb-4">
-        <button
-          onClick={() => setRevealImages(!revealImages)}
-          className="mb-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-700 transition"
-        >
+        <Button onClick={() => setRevealImages(!revealImages)} variant="reveal">
           {revealImages ? 'Hide Images' : 'Reveal All Images'}
-        </button>
+        </Button>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
