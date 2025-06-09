@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getPetById } from '@/api/fetchPets';
 import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { useAuthStore } from '@/store/authStore';
 

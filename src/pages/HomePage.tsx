@@ -4,7 +4,7 @@ import { fetchPets } from '@/api/fetchPets';
 import type { Pet } from '@/types/pet';
 import { useContext } from 'react';
 import { RevealContext } from '@/context/RevealContext';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Buttons/Button';
 
 const HomePage = () => {
   const context = useContext(RevealContext);

@@ -3,8 +3,9 @@ import { RevealContext } from '@/context/RevealContext';
 import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
+import { AdoptButton } from '@/components/Buttons/AdoptButton';
 
 interface PetCardProps {
   pet: Pet;
@@ -61,7 +62,9 @@ const PetCard = ({ pet }: PetCardProps) => {
       </Link>
 
       <div className="mt-4 flex gap-2">
-        <Button variant="primary">Adopt</Button>
+        {currentUser && !isOwner(pet, currentUser) && (
+          <AdoptButton petId={pet.id} />
+        )}
         {ownerCheck && <Button variant="secondary">Edit</Button>}
       </div>
     </article>

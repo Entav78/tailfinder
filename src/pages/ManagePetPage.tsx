@@ -19,7 +19,7 @@ const ManagePetPage = () => {
     size: '',
     color: '',
     description: '',
-    adoptionStatus: 'Available', // optional, men setter default
+    adoptionStatus: 'Available',
     location: '',
     image: {
       url: '',
