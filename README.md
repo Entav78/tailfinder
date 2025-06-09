@@ -1,3 +1,18 @@
+## Adoption request limitations
+
+Due to the lack of a backend with shared data persistence, adoption requests are handled using client-side state (Zustand). This means that:
+
+- Requests are not stored across sessions or shared between browsers
+- If you log out and back in within the same browser tab, all features work as expected
+- Simulating multiple users requires using different tabs with controlled login/logout behavior
+
+A potential workaround could be to persist data using `localStorage`, but this would still not support real multi-user interaction across devices. Since this is a frontend-focused project, I have chosen not to implement localStorage or a custom backend, and instead focus on demonstrating working logic and state flows within the frontend.
+
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
