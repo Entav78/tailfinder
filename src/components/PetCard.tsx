@@ -59,12 +59,15 @@ const PetCard = ({ pet }: PetCardProps) => {
         {currentUser && owner?.name && (
           <p className="text-sm text-gray-500 mt-2">Owner: {owner.name}</p>
         )}
+        {pet.adoptionStatus === 'Adopted' && (
+          <span className="text-xs text-red-500 font-semibold">
+            Already adopted
+          </span>
+        )}
       </Link>
 
       <div className="mt-4 flex gap-2">
-        {currentUser && !isOwner(pet, currentUser) && (
-          <AdoptButton petId={pet.id} />
-        )}
+        {currentUser && !isOwner(pet, currentUser) && <AdoptButton pet={pet} />}
         {ownerCheck && <Button variant="secondary">Edit</Button>}
       </div>
     </article>

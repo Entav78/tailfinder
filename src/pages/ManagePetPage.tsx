@@ -4,6 +4,8 @@ import { useAuthStore } from '@/store/authStore';
 import toast from 'react-hot-toast';
 import { getPetByIdUrl, getPetsUrl } from '@/constants/api';
 import type { Pet } from '@/types/pet';
+import { DeleteButton } from '@/components/Buttons/DeleteButton';
+import { Button } from '@/components/Buttons/Button';
 
 const ManagePetPage = () => {
   const { id } = useParams(); // Bruk kun denne, ikke destrukturer på nytt senere
@@ -221,14 +223,23 @@ const ManagePetPage = () => {
           onChange={handleChange}
           className="w-full p-2 border rounded"
         />
+        <div className="flex gap-4 justify-end">
+          <Button
+            type="submit"
+            variant="primary"
+            isLoading={loading}
+            disabled={loading}
+          >
+            {id ? 'Update Pet' : 'Add Pet'}
+          </Button>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? 'Saving...' : id ? 'Update Pet' : 'Add Pet'}
-        </button>
+          {id && (
+            <DeleteButton
+              petId={formData.id}
+              onDeleted={() => navigate('/profile')}
+            />
+          )}
+        </div>
       </form>
     </section>
   );

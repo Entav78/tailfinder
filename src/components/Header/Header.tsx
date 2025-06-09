@@ -4,6 +4,7 @@ import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 import logo from '@/assets/img/logo-tailfinder.png';
 import LogoutButton from '@/components/Buttons/LogoutButton';
 import { useAuthStore } from '@/store/authStore';
+import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 
 const Header = () => {
   const { accessToken, user } = useAuthStore();
@@ -13,6 +14,12 @@ const Header = () => {
     document.body.classList.toggle('overflow-hidden', menuOpen);
     return () => document.body.classList.remove('overflow-hidden');
   }, [menuOpen]);
+
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
+
+  const totalPendingRequests = useAdoptionRequestStore(
+    (state) => state.requests.filter((r) => r.status === 'pending').length
+  );
 
   return (
     <>
@@ -85,8 +92,13 @@ const Header = () => {
             <Link to="/" className="hover:underline">
               Home
             </Link>
-            <Link to="/profile" className="hover:underline">
+            <Link to="/profile" className="hover:underline relative">
               Profile
+              {isLoggedIn && totalPendingRequests > 0 && (
+                <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  {totalPendingRequests}
+                </span>
+              )}
             </Link>
             <Link to="/manage" className="hover:underline">
               Manage

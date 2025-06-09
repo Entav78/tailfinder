@@ -1,19 +1,22 @@
 import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 import { Button } from '@/components/Buttons/Button';
+import type { Pet } from '@/types/pet';
 
 interface AdoptButtonProps {
-  petId: string;
+  pet: Pet;
 }
 
-export const AdoptButton = ({ petId }: AdoptButtonProps) => {
+export const AdoptButton = ({ pet }: AdoptButtonProps) => {
   const user = useAuthStore((state) => state.user);
   const sendRequest = useAdoptionRequestStore((state) => state.sendRequest);
+
+  if (pet.adoptionStatus === 'Adopted') return null;
 
   const handleAdopt = () => {
     if (!user) return;
     sendRequest({
-      petId,
+      petId: pet.id,
       requesterName: user.name,
       status: 'pending',
     });

@@ -1,4 +1,3 @@
-// src/store/adoptionStore.ts
 import { create } from 'zustand';
 
 interface AdoptionRequest {

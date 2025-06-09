@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PetCard from '@/components/PetCard';
-import { fetchPets } from '@/api/fetchPets';
+import { fetchPets } from '@/api/pets/fetchPets';
 import type { Pet } from '@/types/pet';
 import { useContext } from 'react';
 import { RevealContext } from '@/context/RevealContext';

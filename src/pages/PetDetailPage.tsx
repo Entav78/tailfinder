@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPetById } from '@/api/fetchPets';
+import { getPetById } from '@/api/pets/fetchPets';
 import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/Buttons/Button';
