@@ -18,6 +18,7 @@ export const AdoptButton = ({ pet }: AdoptButtonProps) => {
     sendRequest({
       petId: pet.id,
       requesterName: user.name,
+      ownerName: pet.owner?.name || '',
       status: 'pending',
     });
     alert('Adoption request sent!');

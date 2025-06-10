@@ -1,4 +1,3 @@
-// api.ts
 export const API_BASE = 'https://v2.api.noroff.dev';
 export const API_PETS = `${API_BASE}/pets`;
 export const API_AUTH = `${API_BASE}/auth`;
@@ -16,4 +15,3 @@ export function getRegisterUrl(): string {
 export function getLoginUrl(): string {
   return `${API_AUTH}/login`;
 }
-

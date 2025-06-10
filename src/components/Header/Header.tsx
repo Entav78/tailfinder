@@ -7,7 +7,9 @@ import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 
 const Header = () => {
-  const { accessToken, user } = useAuthStore();
+  const { accessToken } = useAuthStore();
+  const user = useAuthStore((state) => state.user);
+  const requests = useAdoptionRequestStore((state) => state.requests);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -17,9 +19,9 @@ const Header = () => {
 
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
 
-  const totalPendingRequests = useAdoptionRequestStore(
-    (state) => state.requests.filter((r) => r.status === 'pending').length
-  );
+  const alertCount = requests.filter(
+    (r) => r.ownerName === user?.name && r.status === 'pending'
+  ).length;
 
   return (
     <>
@@ -85,6 +87,11 @@ const Header = () => {
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
+            {isLoggedIn && alertCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                {alertCount}
+              </span>
+            )}
           </button>
 
           {/* ✅ Desktop Nav */}
@@ -94,9 +101,9 @@ const Header = () => {
             </Link>
             <Link to="/profile" className="hover:underline relative">
               Profile
-              {isLoggedIn && totalPendingRequests > 0 && (
+              {isLoggedIn && alertCount > 0 && (
                 <span className="absolute -top-2 -right-3 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                  {totalPendingRequests}
+                  {alertCount}
                 </span>
               )}
             </Link>
@@ -167,9 +174,14 @@ const Header = () => {
             <Link
               to="/profile"
               onClick={() => setMenuOpen(false)}
-              className="hover:underline"
+              className="hover:underline relative"
             >
               Profile
+              {isLoggedIn && alertCount > 0 && (
+                <span className="absolute -top-2 -right-4 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  {alertCount}
+                </span>
+              )}
             </Link>
           </li>
           <li>

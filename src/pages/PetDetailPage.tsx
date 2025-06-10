@@ -1,32 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPetById } from '@/api/pets/fetchPets';
-import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { useAuthStore } from '@/store/authStore';
+import { usePetStore } from '@/store/petStore';
 
 const PetDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [pet, setPet] = useState<Pet | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!id) return;
-
-    getPetById(id)
-      .then(setPet)
-      .catch((err) => console.error('Failed to load pet details', err))
-      .finally(() => setLoading(false));
-  }, [id]);
+  const pets = usePetStore((state) => state.pets);
+  const fetchPets = usePetStore((state) => state.fetchPets);
+  const pet = pets.find((p) => p.id === id);
 
   const currentUser = useAuthStore((state) => state.user?.name);
+  const userIsOwner = pet ? isOwner(pet, currentUser) : false;
 
-  if (loading) return <p className="text-center p-4">Loading pet...</p>;
-  if (!pet) return <p className="text-center p-4">Pet not found.</p>;
+  useEffect(() => {
+    if (!pet) {
+      fetchPets(); // henter dyrene hvis det ikke er noen lagret
+    }
+  }, [pet, fetchPets]);
 
-  const userIsOwner = isOwner(pet, currentUser);
+  if (!pet) return <p className="text-center p-4">Loading pet...</p>;
 
   return (
     <section className="max-w-3xl mx-auto p-4">
@@ -67,7 +63,10 @@ const PetDetailPage = () => {
             <strong>Location:</strong> {pet.location}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Status:</strong> {pet.adoptionStatus || 'Available'}
+            <strong>Status:</strong>{' '}
+            <span className="font-semibold">
+              {pet.adoptionStatus === 'Adopted' ? 'Adopted' : 'Available'}
+            </span>
           </p>
           <p className="text-gray-700 dark:text-gray-200 mt-4">
             {pet.description}
