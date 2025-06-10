@@ -17,6 +17,7 @@ export default {
         'secondary-hover': '#7a5d4c',
         reveal: '#c48b4c',
         'reveal-hover': '#eab308',
+        adoptedBadge: '#233511',
         
         dark: {
           background: "#1a1a1a",

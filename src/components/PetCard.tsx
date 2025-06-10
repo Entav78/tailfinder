@@ -28,7 +28,7 @@ const PetCard = ({ pet }: PetCardProps) => {
 
   return (
     <article
-      className={`bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg ${
+      className={`relative bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg ${
         pet.adoptionStatus === 'Adopted' ? 'opacity-60' : ''
       }`}
     >
@@ -64,7 +64,7 @@ const PetCard = ({ pet }: PetCardProps) => {
           <p className="text-sm text-gray-500 mt-2">Owner: {owner.name}</p>
         )}
         {pet.adoptionStatus === 'Adopted' && (
-          <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow">
+          <div className="absolute top-2 right-2 bg-adoptedBadge text-white text-xs px-2 py-1 rounded shadow">
             Adopted
           </div>
         )}
