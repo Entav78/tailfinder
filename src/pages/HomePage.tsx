@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import PetCard from '@/components/PetCard';
-import { fetchPets } from '@/api/pets/fetchPets';
-import type { Pet } from '@/types/pet';
-import { useContext } from 'react';
 import { RevealContext } from '@/context/RevealContext';
 import { Button } from '@/components/Buttons/Button';
+import { usePetStore } from '@/store/petStore';
 
 const HomePage = () => {
   const context = useContext(RevealContext);
@@ -12,19 +10,19 @@ const HomePage = () => {
 
   const { revealImages, setRevealImages } = context;
 
-  const [pets, setPets] = useState<Pet[]>([]);
-  const [loading, setLoading] = useState(true);
+  const pets = usePetStore((state) => state.pets);
+  const fetchPets = usePetStore((state) => state.fetchPets);
 
   useEffect(() => {
-    fetchPets()
-      .then(setPets)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
+    if (pets.length === 0) {
+      fetchPets();
+    }
+  }, [pets, fetchPets]);
 
-  if (loading) {
+  if (pets.length === 0) {
     return <p className="text-center p-4">Loading pets...</p>;
   }
+
   return (
     <div className="p-4 max-w-4xl mx-auto">
       <div className="flex justify-end mb-4">

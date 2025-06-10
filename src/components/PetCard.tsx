@@ -27,7 +27,11 @@ const PetCard = ({ pet }: PetCardProps) => {
   const ownerCheck = isOwner(pet, currentUser);
 
   return (
-    <article className="bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg">
+    <article
+      className={`bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg ${
+        pet.adoptionStatus === 'Adopted' ? 'opacity-60' : ''
+      }`}
+    >
       <Link to={`/pets/${id}`} className="block group">
         {revealImages && image?.url ? (
           <img
@@ -60,14 +64,16 @@ const PetCard = ({ pet }: PetCardProps) => {
           <p className="text-sm text-gray-500 mt-2">Owner: {owner.name}</p>
         )}
         {pet.adoptionStatus === 'Adopted' && (
-          <span className="text-xs text-red-500 font-semibold">
-            Already adopted
-          </span>
+          <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded shadow">
+            Adopted
+          </div>
         )}
       </Link>
 
       <div className="mt-4 flex gap-2">
-        {currentUser && !isOwner(pet, currentUser) && <AdoptButton pet={pet} />}
+        {currentUser &&
+          !isOwner(pet, currentUser) &&
+          pet.adoptionStatus !== 'Adopted' && <AdoptButton pet={pet} />}
         {ownerCheck && <Button variant="secondary">Edit</Button>}
       </div>
     </article>
