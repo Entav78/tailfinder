@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Pet } from '@/types/pet';
 import { usePetStore } from './petStore';
-import { useAuthStore } from './authStore';
 
 export interface AdoptionRequest {
   petId: string;
@@ -19,8 +18,6 @@ type AdoptionRequestInput = Omit<AdoptionRequest, 'date'>;
 
 export interface AdoptionRequestStore {
   requests: AdoptionRequest[];
-  alertCount: number;
-  resetAlertCount: () => void;
   sendRequest: (request: AdoptionRequestInput) => void;
   getRequestsForPet: (petId: string) => AdoptionRequest[];
   getRequestsForOwner: (ownerName: string, pets: Pet[]) => AdoptionRequest[];
@@ -30,32 +27,25 @@ export interface AdoptionRequestStore {
     status: 'approved' | 'declined'
   ) => void;
   markRequestsAsSeen: (type: 'owner' | 'requester', userName: string) => void;
+  getAlertCountForUser: (userName: string) => number;
 }
 
 export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
   devtools((set, get) => ({
     requests: [],
-    alertCount: 0,
-    resetAlertCount: () => set({ alertCount: 0 }),
 
     sendRequest: (request) =>
-      set((state) => {
-        const currentUser = useAuthStore.getState().user?.name;
-        const isRequester = request.requesterName === currentUser;
-
-        return {
-          requests: [
-            ...state.requests,
-            {
-              ...request,
-              date: new Date().toISOString(),
-              seenByRequester: false,
-              seenByOwner: false,
-            },
-          ],
-          alertCount: isRequester ? state.alertCount : state.alertCount + 1,
-        };
-      }),
+      set((state) => ({
+        requests: [
+          ...state.requests,
+          {
+            ...request,
+            date: new Date().toISOString(),
+            seenByRequester: false,
+            seenByOwner: false,
+          },
+        ],
+      })),
 
     markRequestsAsSeen: (type: 'owner' | 'requester', userName: string) => {
       set((state) => ({
@@ -100,11 +90,30 @@ export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
             ? {
                 ...req,
                 status,
+                seenByOwner: true,
                 updatedAt: new Date().toISOString(),
               }
             : req
         ),
       }));
+    },
+
+    getAlertCountForUser: (userName: string) => {
+      const requests = get().requests;
+
+      const asOwner = requests.filter(
+        (r) =>
+          r.ownerName === userName && r.status === 'pending' && !r.seenByOwner
+      );
+
+      const asRequester = requests.filter(
+        (r) =>
+          r.requesterName === userName &&
+          (r.status === 'approved' || r.status === 'declined') &&
+          !r.seenByRequester
+      );
+
+      return asOwner.length + asRequester.length;
     },
   }))
 );

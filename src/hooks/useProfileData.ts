@@ -16,9 +16,6 @@ export function useProfileData() {
     (state) => state.updateRequestStatus
   );
   const adoptionRequests = useAdoptionRequestStore((state) => state.requests);
-  const resetAlertCount = useAdoptionRequestStore(
-    (state) => state.resetAlertCount
-  );
   const markRequestsAsSeen = useAdoptionRequestStore(
     (state) => state.markRequestsAsSeen
   );
@@ -86,6 +83,10 @@ export function useProfileData() {
       await updateAdoptionStatusApi(petId, status, accessToken);
       updateStatus(petId, requesterName, status);
 
+      if (user?.name) {
+        markRequestsAsSeen('owner', user.name);
+      }
+
       toast.success(
         `You have ${
           status === 'approved' ? 'approved' : 'declined'
@@ -99,22 +100,20 @@ export function useProfileData() {
     }
   };
 
-  // Mark approved/declined requests as seen and reset alertCount
   useEffect(() => {
-    if (user?.name) {
-      const hasUnseenResponses = adoptionRequests.some(
-        (r) =>
-          r.requesterName === user.name &&
-          (r.status === 'approved' || r.status === 'declined') &&
-          !r.seenByRequester
-      );
+    if (!user?.name) return;
 
-      if (hasUnseenResponses) {
-        markRequestsAsSeen('requester', user.name);
-        resetAlertCount();
-      }
+    const unseenRequesterResponses = adoptionRequests.some(
+      (r) =>
+        r.requesterName === user.name &&
+        (r.status === 'approved' || r.status === 'declined') &&
+        !r.seenByRequester
+    );
+
+    if (unseenRequesterResponses) {
+      markRequestsAsSeen('requester', user.name);
     }
-  }, [user?.name, adoptionRequests, markRequestsAsSeen, resetAlertCount]);
+  }, [user?.name, adoptionRequests, markRequestsAsSeen]);
 
   return {
     user,
