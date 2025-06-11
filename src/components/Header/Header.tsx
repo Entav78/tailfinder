@@ -9,7 +9,11 @@ import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 const Header = () => {
   const { accessToken } = useAuthStore();
   const user = useAuthStore((state) => state.user);
-  const requests = useAdoptionRequestStore((state) => state.requests);
+  const { requests } = useAdoptionRequestStore();
+  const ownApprovedCount = requests.filter(
+    (r) => r.requesterName === user?.name && r.status === 'approved'
+  ).length;
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -19,9 +23,9 @@ const Header = () => {
 
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
 
-  const alertCount = requests.filter(
-    (r) => r.ownerName === user?.name && r.status === 'pending'
-  ).length;
+  const alertCount =
+    requests.filter((r) => r.ownerName === user?.name && r.status === 'pending')
+      .length + ownApprovedCount;
 
   return (
     <>

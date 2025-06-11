@@ -14,15 +14,10 @@ const HomePage = () => {
   const fetchPets = usePetStore((state) => state.fetchPets);
 
   useEffect(() => {
-    if (pets.length === 0) {
-      fetchPets();
-    }
-  }, [pets, fetchPets]);
+    fetchPets();
+  }, [fetchPets]);
 
-  if (pets.length === 0) {
-    return <p className="text-center p-4">Loading pets...</p>;
-  }
-
+  if (!pets.length) return <p className="text-center p-4">Loading pets...</p>;
   return (
     <div className="p-4 max-w-4xl mx-auto">
       <div className="flex justify-end mb-4">

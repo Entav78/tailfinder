@@ -1,6 +1,8 @@
 export const API_BASE = 'https://v2.api.noroff.dev';
 export const API_PETS = `${API_BASE}/pets`;
 export const API_AUTH = `${API_BASE}/auth`;
+export const NOROFF_API_KEY = import.meta.env.VITE_API_KEY;
+
 
 export const getPetsUrl = () => API_PETS;
 

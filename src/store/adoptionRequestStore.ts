@@ -10,6 +10,8 @@ export interface AdoptionRequest {
   message?: string;
   status: 'pending' | 'approved' | 'declined';
   date: string;
+  seenByRequester?: boolean;
+  seenByOwner?: boolean;
 }
 
 type AdoptionRequestInput = Omit<AdoptionRequest, 'date'>;
@@ -34,9 +36,37 @@ export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
       set((state) => ({
         requests: [
           ...state.requests,
-          { ...request, date: new Date().toISOString() },
+          {
+            ...request,
+            date: new Date().toISOString(),
+            seenByRequester: false,
+            seenByOwner: false,
+          },
         ],
       })),
+
+    markRequestsAsSeen: (type: 'owner' | 'requester', userName: string) => {
+      set((state) => ({
+        requests: state.requests.map((r) => {
+          if (
+            (type === 'owner' &&
+              r.ownerName === userName &&
+              r.status === 'pending') ||
+            (type === 'requester' &&
+              r.requesterName === userName &&
+              (r.status === 'approved' || r.status === 'declined'))
+          ) {
+            return {
+              ...r,
+              ...(type === 'owner'
+                ? { seenByOwner: true }
+                : { seenByRequester: true }),
+            };
+          }
+          return r;
+        }),
+      }));
+    },
 
     getRequestsForPet: (petId: string) =>
       get().requests.filter((r) => r.petId === petId),

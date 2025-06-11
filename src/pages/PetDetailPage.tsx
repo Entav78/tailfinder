@@ -5,6 +5,8 @@ import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { useAuthStore } from '@/store/authStore';
 import { usePetStore } from '@/store/petStore';
+import { AdoptButton } from '@/components/Buttons/AdoptButton';
+import { findRequesterName } from '@/utils/findRequesterName';
 
 const PetDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -76,12 +78,20 @@ const PetDetailPage = () => {
               <strong>Owner:</strong> {pet.owner.name}
             </p>
           )}
-          {userIsOwner && (
-            <div className="mt-6">
-              <Link to={`/pets/edit/${pet.id}`}>
-                <Button variant="secondary">Edit Pet</Button>
-              </Link>
+          {userIsOwner && pet.adoptionStatus !== 'Adopted' && (
+            <Link to={`/pets/edit/${pet.id}`}>
+              <Button variant="secondary">Edit Pet</Button>
+            </Link>
+          )}
+          {!userIsOwner && pet.adoptionStatus !== 'Adopted' && (
+            <div className="mt-4">
+              <AdoptButton pet={pet} />
             </div>
+          )}
+          {userIsOwner && pet.adoptionStatus === 'Adopted' && (
+            <p className="mt-4 font-medium text-green-600 dark:text-green-400">
+              Adopted by: {findRequesterName(pet.id)}
+            </p>
           )}
         </div>
       </div>
