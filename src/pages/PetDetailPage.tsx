@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { useAuthStore } from '@/store/authStore';
@@ -11,28 +10,46 @@ import { findRequesterName } from '@/utils/findRequesterName';
 const PetDetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
-  const pets = usePetStore((state) => state.pets);
   const fetchPets = usePetStore((state) => state.fetchPets);
-  const pet = pets.find((p) => p.id === id);
+  const updatedPet = usePetStore((state) =>
+    state.pets.find((p) => p.id === id)
+  );
 
   const currentUser = useAuthStore((state) => state.user?.name);
-  const userIsOwner = pet ? isOwner(pet, currentUser) : false;
+  const userIsOwner = updatedPet ? isOwner(updatedPet, currentUser) : false;
 
   useEffect(() => {
-    if (!pet) {
+    if (!updatedPet) {
       fetchPets(); // henter dyrene hvis det ikke er noen lagret
     }
-  }, [pet, fetchPets]);
+  }, [updatedPet, fetchPets]);
 
-  if (!pet) return <p className="text-center p-4">Loading pet...</p>;
+  if (!updatedPet) return <p className="text-center p-4">Loading pet...</p>;
+
+  const {
+    name,
+    image,
+    species,
+    breed,
+    age,
+    gender,
+    size,
+    color,
+    location,
+    adoptionStatus,
+    description,
+    owner,
+  } = updatedPet;
+
+  const isAdopted = adoptionStatus === 'Adopted';
 
   return (
     <section className="max-w-3xl mx-auto p-4">
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
-        {pet.image?.url ? (
+        {image?.url ? (
           <img
-            src={pet.image.url}
-            alt={pet.image.alt || `${pet.name} the ${pet.breed}`}
+            src={image.url}
+            alt={image.alt || `${name} the ${breed}`}
             className="w-full h-64 object-cover"
           />
         ) : (
@@ -42,55 +59,57 @@ const PetDetailPage = () => {
         )}
 
         <div className="p-6">
-          <h1 className="text-3xl font-bold mb-2">{pet.name}</h1>
+          <h1 className="text-3xl font-bold mb-2">{name}</h1>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Species:</strong> {pet.species}
+            <strong>Species:</strong> {species}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Breed:</strong> {pet.breed}
+            <strong>Breed:</strong> {breed}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Age:</strong> {pet.age}
+            <strong>Age:</strong> {age}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Gender:</strong> {pet.gender}
+            <strong>Gender:</strong> {gender}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Size:</strong> {pet.size}
+            <strong>Size:</strong> {size}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Color:</strong> {pet.color}
+            <strong>Color:</strong> {color}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
-            <strong>Location:</strong> {pet.location}
+            <strong>Location:</strong> {location}
           </p>
           <p className="text-gray-600 dark:text-gray-300 mb-1">
             <strong>Status:</strong>{' '}
             <span className="font-semibold">
-              {pet.adoptionStatus === 'Adopted' ? 'Adopted' : 'Available'}
+              {isAdopted ? 'Adopted' : 'Available'}
             </span>
           </p>
-          <p className="text-gray-700 dark:text-gray-200 mt-4">
-            {pet.description}
-          </p>
-          {currentUser && pet.owner?.name && (
+          <p className="text-gray-700 dark:text-gray-200 mt-4">{description}</p>
+
+          {currentUser && owner?.name && (
             <p className="text-gray-500 dark:text-gray-300 mt-2 text-sm">
-              <strong>Owner:</strong> {pet.owner.name}
+              <strong>Owner:</strong> {owner.name}
             </p>
           )}
-          {userIsOwner && pet.adoptionStatus !== 'Adopted' && (
-            <Link to={`/pets/edit/${pet.id}`}>
+
+          {!isAdopted && userIsOwner && (
+            <Link to={`/pets/edit/${updatedPet.id}`}>
               <Button variant="secondary">Edit Pet</Button>
             </Link>
           )}
-          {!userIsOwner && pet.adoptionStatus !== 'Adopted' && (
+
+          {!isAdopted && !userIsOwner && (
             <div className="mt-4">
-              <AdoptButton pet={pet} />
+              <AdoptButton pet={updatedPet} />
             </div>
           )}
-          {userIsOwner && pet.adoptionStatus === 'Adopted' && (
+
+          {isAdopted && userIsOwner && (
             <p className="mt-4 font-medium text-green-600 dark:text-green-400">
-              Adopted by: {findRequesterName(pet.id)}
+              Adopted by: {findRequesterName(updatedPet.id)}
             </p>
           )}
         </div>

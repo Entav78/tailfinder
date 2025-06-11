@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { AdoptButton } from '@/components/Buttons/AdoptButton';
+import { usePetStore } from '@/store/petStore';
 
 interface PetCardProps {
   pet: Pet;
@@ -21,15 +22,35 @@ const PetCard = ({ pet }: PetCardProps) => {
   }
 
   const { revealImages } = context;
-  const { id, name, description, image, breed, age, size, color, owner } = pet;
-
   const currentUser = useAuthStore((state) => state.user?.name);
-  const ownerCheck = isOwner(pet, currentUser);
+
+  const updatedPet = usePetStore((state) =>
+    state.pets.find((p) => p.id === pet.id)
+  );
+
+  // Fallback hvis pet ikke er funnet i store
+  if (!updatedPet) return null;
+
+  const {
+    id,
+    name,
+    description,
+    image,
+    breed,
+    age,
+    size,
+    color,
+    owner,
+    adoptionStatus,
+  } = updatedPet;
+
+  const ownerCheck = isOwner(updatedPet, currentUser);
+  const isAdopted = adoptionStatus === 'Adopted';
 
   return (
     <article
       className={`relative bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg ${
-        pet.adoptionStatus === 'Adopted' ? 'opacity-60' : ''
+        isAdopted ? 'opacity-60' : ''
       }`}
     >
       <Link to={`/pets/${id}`} className="block group">
@@ -60,22 +81,24 @@ const PetCard = ({ pet }: PetCardProps) => {
         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
           {description}
         </p>
+
         {currentUser && owner?.name && (
           <p className="text-sm text-gray-500 mt-2">Owner: {owner.name}</p>
         )}
-        {pet.adoptionStatus === 'Adopted' && (
+
+        {isAdopted && (
           <div className="absolute top-2 right-2 bg-adoptedBadge text-white text-xs px-2 py-1 rounded shadow">
             Adopted
           </div>
         )}
       </Link>
 
-      <div className="mt-4 flex gap-2">
-        {currentUser &&
-          !isOwner(pet, currentUser) &&
-          pet.adoptionStatus !== 'Adopted' && <AdoptButton pet={pet} />}
-        {ownerCheck && <Button variant="secondary">Edit</Button>}
-      </div>
+      {!isAdopted && (
+        <div className="mt-4 flex gap-2">
+          {currentUser && !ownerCheck && <AdoptButton pet={updatedPet} />}
+          {ownerCheck && <Button variant="secondary">Edit</Button>}
+        </div>
+      )}
     </article>
   );
 };

@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 import { getPetsUrl } from '@/constants/api';
-import { updateAdoptionStatus as updateAdoptionStatusApi } from '@/api/pets/updateAdoptionStatus';
+//import { updateAdoptionStatus as updateAdoptionStatusApi } from '@/api/pets/updateAdoptionStatus';
 import { usePetStore } from '@/store/petStore';
 import type { Pet } from '@/types/pet';
 import type { AdoptionRequest } from '@/store/adoptionRequestStore';
 import toast from 'react-hot-toast';
+import { updateAdoptionStatus } from '@/api/pets/updateAdoptionStatus';
 
 export function useProfileData() {
   const user = useAuthStore((state) => state.user);
@@ -80,8 +81,12 @@ export function useProfileData() {
     try {
       if (!accessToken) throw new Error('No token found');
 
-      await updateAdoptionStatusApi(petId, status, accessToken);
-      updateStatus(petId, requesterName, status);
+      if (status === 'approved') {
+        await updateAdoptionStatus(petId, 'Adopted', accessToken); // API
+        await usePetStore.getState().fetchPets(); // Sync pets
+      }
+
+      updateStatus(petId, requesterName, status); // Update local request
 
       if (user?.name) {
         markRequestsAsSeen('owner', user.name);
