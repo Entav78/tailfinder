@@ -16,6 +16,12 @@ export function useProfileData() {
     (state) => state.updateRequestStatus
   );
   const adoptionRequests = useAdoptionRequestStore((state) => state.requests);
+  const resetAlertCount = useAdoptionRequestStore(
+    (state) => state.resetAlertCount
+  );
+  const markRequestsAsSeen = useAdoptionRequestStore(
+    (state) => state.markRequestsAsSeen
+  );
 
   const [userPets, setUserPets] = useState<Pet[]>([]);
   const [requests, setRequests] = useState<AdoptionRequest[]>([]);
@@ -92,6 +98,23 @@ export function useProfileData() {
       toast.error('Something went wrong. Please try again.');
     }
   };
+
+  // Mark approved/declined requests as seen and reset alertCount
+  useEffect(() => {
+    if (user?.name) {
+      const hasUnseenResponses = adoptionRequests.some(
+        (r) =>
+          r.requesterName === user.name &&
+          (r.status === 'approved' || r.status === 'declined') &&
+          !r.seenByRequester
+      );
+
+      if (hasUnseenResponses) {
+        markRequestsAsSeen('requester', user.name);
+        resetAlertCount();
+      }
+    }
+  }, [user?.name, adoptionRequests, markRequestsAsSeen, resetAlertCount]);
 
   return {
     user,

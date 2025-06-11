@@ -19,7 +19,21 @@ const Header = () => {
 
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn());
 
-  const alertCount = useAdoptionRequestStore((state) => state.alertCount);
+  const alertCount = useAdoptionRequestStore((state) => {
+    if (!user?.name) return 0;
+
+    return state.requests.filter((r) => {
+      const isRequester =
+        r.requesterName === user.name &&
+        (r.status === 'approved' || r.status === 'declined') &&
+        !r.seenByRequester;
+
+      const isOwner =
+        r.ownerName === user.name && r.status === 'pending' && !r.seenByOwner;
+
+      return isRequester || isOwner;
+    }).length;
+  });
 
   return (
     <>

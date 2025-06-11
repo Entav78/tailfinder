@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Pet } from '@/types/pet';
 import { usePetStore } from './petStore';
+import { useAuthStore } from './authStore';
 
 export interface AdoptionRequest {
   petId: string;
@@ -28,6 +29,7 @@ export interface AdoptionRequestStore {
     requesterName: string,
     status: 'approved' | 'declined'
   ) => void;
+  markRequestsAsSeen: (type: 'owner' | 'requester', userName: string) => void;
 }
 
 export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
@@ -37,18 +39,23 @@ export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
     resetAlertCount: () => set({ alertCount: 0 }),
 
     sendRequest: (request) =>
-      set((state) => ({
-        requests: [
-          ...state.requests,
-          {
-            ...request,
-            date: new Date().toISOString(),
-            seenByRequester: false,
-            seenByOwner: false,
-          },
-        ],
-        alertCount: state.alertCount + 1,
-      })),
+      set((state) => {
+        const currentUser = useAuthStore.getState().user?.name;
+        const isRequester = request.requesterName === currentUser;
+
+        return {
+          requests: [
+            ...state.requests,
+            {
+              ...request,
+              date: new Date().toISOString(),
+              seenByRequester: false,
+              seenByOwner: false,
+            },
+          ],
+          alertCount: isRequester ? state.alertCount : state.alertCount + 1,
+        };
+      }),
 
     markRequestsAsSeen: (type: 'owner' | 'requester', userName: string) => {
       set((state) => ({
