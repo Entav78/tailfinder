@@ -18,6 +18,8 @@ type AdoptionRequestInput = Omit<AdoptionRequest, 'date'>;
 
 export interface AdoptionRequestStore {
   requests: AdoptionRequest[];
+  alertCount: number;
+  resetAlertCount: () => void;
   sendRequest: (request: AdoptionRequestInput) => void;
   getRequestsForPet: (petId: string) => AdoptionRequest[];
   getRequestsForOwner: (ownerName: string, pets: Pet[]) => AdoptionRequest[];
@@ -31,6 +33,8 @@ export interface AdoptionRequestStore {
 export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
   devtools((set, get) => ({
     requests: [],
+    alertCount: 0,
+    resetAlertCount: () => set({ alertCount: 0 }),
 
     sendRequest: (request) =>
       set((state) => ({
@@ -43,6 +47,7 @@ export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
             seenByOwner: false,
           },
         ],
+        alertCount: state.alertCount + 1,
       })),
 
     markRequestsAsSeen: (type: 'owner' | 'requester', userName: string) => {
@@ -78,7 +83,6 @@ export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
       }),
 
     updateRequestStatus: (petId, requesterName, status) => {
-      // ✅ Hvis approved: oppdater adoptionStatus til Adopted
       if (status === 'approved') {
         usePetStore.getState().updateAdoptionStatus(petId, 'Adopted');
       }
