@@ -6,7 +6,8 @@ export function filterPets(
   searchTerm: string,
   viewMode: string,
   includedSpecies: string[],
-  excludedSpecies: string[]
+  excludedSpecies: string[],
+  showAdopted: boolean
 ): Pet[] {
   const expandedExcluded = new Set<string>();
 
@@ -16,6 +17,8 @@ export function filterPets(
   });
 
   return pets.filter((pet) => {
+    if (!showAdopted && pet.adoptionStatus === 'Adopted') return false;
+
     const species = pet.species?.toLowerCase() || '';
     const breed = pet.breed?.toLowerCase() || '';
     const description = pet.description?.toLowerCase() || '';

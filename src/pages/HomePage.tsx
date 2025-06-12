@@ -41,15 +41,32 @@ const HomePage = () => {
     return Array.from(speciesSet).sort();
   }, [pets]);
 
+  const [showAdopted, setShowAdopted] = useState(() => {
+    const saved = localStorage.getItem('showAdopted');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('showAdopted', JSON.stringify(showAdopted));
+  }, [showAdopted]);
+
   const filteredPets = useMemo(() => {
     return filterPets(
       pets,
       searchTerm,
       viewMode,
       includedSpecies,
-      excludedSpecies
+      excludedSpecies,
+      showAdopted
     );
-  }, [pets, searchTerm, viewMode, includedSpecies, excludedSpecies]);
+  }, [
+    pets,
+    searchTerm,
+    viewMode,
+    includedSpecies,
+    excludedSpecies,
+    showAdopted,
+  ]);
 
   if (!pets.length) return <p className="text-center p-4">Loading pets...</p>;
 
@@ -57,7 +74,7 @@ const HomePage = () => {
     <div className="p-4 max-w-4xl mx-auto">
       <SearchAndFilter
         viewMode={viewMode}
-        onViewModeChange={setViewMode}
+        showAdopted={showAdopted}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
         includedSpecies={includedSpecies}
@@ -65,6 +82,8 @@ const HomePage = () => {
         excludedSpecies={excludedSpecies}
         onExcludedSpeciesChange={setExcludedSpecies}
         availableSpecies={availableSpecies}
+        onShowAdoptedChange={setShowAdopted}
+        onViewModeChange={setViewMode}
       />
 
       <div className="flex justify-end mb-4">

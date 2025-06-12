@@ -1,6 +1,6 @@
 interface SearchAndFilterProps {
-  viewMode: 'all' | 'exclude' | 'include';
-  onViewModeChange: (value: 'all' | 'exclude' | 'include') => void;
+  viewMode: 'all' | 'include' | 'exclude';
+  onViewModeChange: (value: 'all' | 'include' | 'exclude') => void;
   searchTerm: string;
   onSearchChange: (value: string) => void;
   includedSpecies: string[];
@@ -8,6 +8,8 @@ interface SearchAndFilterProps {
   excludedSpecies: string[];
   onExcludedSpeciesChange: (value: string[]) => void;
   availableSpecies: string[];
+  showAdopted: boolean;
+  onShowAdoptedChange: (value: boolean) => void;
 }
 
 export function SearchAndFilter({
@@ -20,6 +22,8 @@ export function SearchAndFilter({
   excludedSpecies,
   onExcludedSpeciesChange,
   availableSpecies,
+  showAdopted,
+  onShowAdoptedChange,
 }: SearchAndFilterProps) {
   const handleCheckboxChange = (
     value: string,
@@ -43,6 +47,16 @@ export function SearchAndFilter({
         onChange={(e) => onSearchChange(e.target.value)}
         className="input-style"
       />
+
+      {/* Show adopted pets */}
+      <label className="flex items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          checked={showAdopted}
+          onChange={(e) => onShowAdoptedChange(e.target.checked)}
+        />
+        Show adopted pets
+      </label>
 
       {/* View mode selection */}
       <div>
