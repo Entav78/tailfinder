@@ -35,11 +35,28 @@ const HomePage = () => {
 
   const filteredPets = useMemo(() => {
     return pets.filter((pet) => {
+      const search = searchTerm.toLowerCase();
+
+      const allValues = [
+        pet.name,
+        pet.species,
+        pet.breed,
+        pet.age?.toString(),
+        pet.gender,
+        pet.size,
+        pet.color,
+        pet.description,
+        pet.location,
+        pet.owner?.name,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      const matchesSearch = allValues.includes(search);
+
       const species = pet.species?.toLowerCase() || '';
       const breed = pet.breed?.toLowerCase() || '';
-      const name = pet.name.toLowerCase();
-
-      const matchesSearch = name.includes(searchTerm.toLowerCase());
 
       const matchesIncluded =
         viewMode !== 'include' ||
