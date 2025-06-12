@@ -7,6 +7,7 @@ import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { AdoptButton } from '@/components/Buttons/AdoptButton';
 import { usePetStore } from '@/store/petStore';
+import { toast } from 'react-hot-toast';
 
 interface PetCardProps {
   pet: Pet;
@@ -47,6 +48,17 @@ const PetCard = ({ pet }: PetCardProps) => {
   const ownerCheck = isOwner(updatedPet, currentUser);
   const isAdopted = adoptionStatus === 'Adopted';
 
+  const handleShare = async (petId: string) => {
+    try {
+      const url = `${window.location.origin}/pets/${petId}`;
+      await navigator.clipboard.writeText(url);
+      toast.success('Link copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      toast.error('Could not copy the link.');
+    }
+  };
+
   return (
     <article
       className={`relative bg-white dark:bg-gray-800 shadow rounded p-4 transition hover:shadow-lg ${
@@ -68,9 +80,19 @@ const PetCard = ({ pet }: PetCardProps) => {
           </div>
         )}
 
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-1 group-hover:underline">
-          {name}
-        </h2>
+        <div className="flex items-center justify-between mb-1">
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-white group-hover:underline">
+            {name}
+          </h2>
+          <button
+            onClick={() => handleShare(pet.id)}
+            className="text-sm text-header hover:underline flex items-center gap-1 transition"
+            title="Copy link to this pet"
+          >
+            <span>🔗</span>
+            <span>Copy Link</span>
+          </button>
+        </div>
 
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{breed}</p>
 

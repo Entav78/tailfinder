@@ -19,7 +19,14 @@ const HomePage = () => {
     'all'
   );
   const [includedSpecies, setIncludedSpecies] = useState<string[]>([]);
-  const [excludedSpecies, setExcludedSpecies] = useState<string[]>([]);
+  const [excludedSpecies, setExcludedSpecies] = useState<string[]>(() => {
+    const saved = localStorage.getItem('excludedSpecies');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('excludedSpecies', JSON.stringify(excludedSpecies));
+  }, [excludedSpecies]);
 
   useEffect(() => {
     fetchPets();
@@ -36,16 +43,19 @@ const HomePage = () => {
   const filteredPets = useMemo(() => {
     return pets.filter((pet) => {
       const search = searchTerm.toLowerCase();
+      const species = pet.species?.toLowerCase() || '';
+      const breed = pet.breed?.toLowerCase() || '';
+      const description = pet.description?.toLowerCase() || '';
 
       const allValues = [
         pet.name,
-        pet.species,
-        pet.breed,
+        species,
+        breed,
         pet.age?.toString(),
         pet.gender,
         pet.size,
         pet.color,
-        pet.description,
+        description,
         pet.location,
         pet.owner?.name,
       ]
@@ -55,24 +65,19 @@ const HomePage = () => {
 
       const matchesSearch = allValues.includes(search);
 
-      const species = pet.species?.toLowerCase() || '';
-      const breed = pet.breed?.toLowerCase() || '';
-
       const matchesIncluded =
-        viewMode !== 'include' ||
-        includedSpecies.length === 0 ||
-        includedSpecies.includes(species);
+        viewMode !== 'include' || includedSpecies.includes(species);
 
-      const matchesExcluded =
-        viewMode !== 'exclude' || !excludedSpecies.includes(species);
+      // 🐍 Block if species, breed or description includes any excluded term
+      const matchesExcluded = !excludedSpecies.some((excluded) => {
+        return (
+          species.includes(excluded) ||
+          breed.includes(excluded) ||
+          description.includes(excluded)
+        );
+      });
 
-      const breedBlocked =
-        viewMode === 'exclude' &&
-        excludedSpecies.some((excluded) => breed.includes(excluded));
-
-      return (
-        matchesSearch && matchesIncluded && matchesExcluded && !breedBlocked
-      );
+      return matchesSearch && matchesIncluded && matchesExcluded;
     });
   }, [pets, searchTerm, viewMode, includedSpecies, excludedSpecies]);
 
