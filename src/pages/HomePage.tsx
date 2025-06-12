@@ -4,6 +4,7 @@ import { RevealContext } from '@/context/RevealContext';
 import { Button } from '@/components/Buttons/Button';
 import { usePetStore } from '@/store/petStore';
 import { SearchAndFilter } from '@/components/SearchAndFilter/SearchAndFilter';
+import { filterPets } from '@/utils/filterPets';
 
 const HomePage = () => {
   const context = useContext(RevealContext);
@@ -41,44 +42,13 @@ const HomePage = () => {
   }, [pets]);
 
   const filteredPets = useMemo(() => {
-    return pets.filter((pet) => {
-      const search = searchTerm.toLowerCase();
-      const species = pet.species?.toLowerCase() || '';
-      const breed = pet.breed?.toLowerCase() || '';
-      const description = pet.description?.toLowerCase() || '';
-
-      const allValues = [
-        pet.name,
-        species,
-        breed,
-        pet.age?.toString(),
-        pet.gender,
-        pet.size,
-        pet.color,
-        description,
-        pet.location,
-        pet.owner?.name,
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-
-      const matchesSearch = allValues.includes(search);
-
-      const matchesIncluded =
-        viewMode !== 'include' || includedSpecies.includes(species);
-
-      // 🐍 Block if species, breed or description includes any excluded term
-      const matchesExcluded = !excludedSpecies.some((excluded) => {
-        return (
-          species.includes(excluded) ||
-          breed.includes(excluded) ||
-          description.includes(excluded)
-        );
-      });
-
-      return matchesSearch && matchesIncluded && matchesExcluded;
-    });
+    return filterPets(
+      pets,
+      searchTerm,
+      viewMode,
+      includedSpecies,
+      excludedSpecies
+    );
   }, [pets, searchTerm, viewMode, includedSpecies, excludedSpecies]);
 
   if (!pets.length) return <p className="text-center p-4">Loading pets...</p>;
