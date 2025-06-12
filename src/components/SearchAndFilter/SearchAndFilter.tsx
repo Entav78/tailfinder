@@ -51,7 +51,7 @@ export function SearchAndFilter({
           placeholder="Search pets..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="input-style pl-10 w-full"
+          className="input-style pl-10 w-full rounded"
         />
       </div>
 
@@ -74,7 +74,7 @@ export function SearchAndFilter({
           onChange={(e) =>
             onViewModeChange(e.target.value as 'all' | 'exclude' | 'include')
           }
-          className="select-style w-full pl-3"
+          className="select-style w-full pl-3 rounded"
         >
           <option value="all">Show all species</option>
           <option value="exclude">Hide selected species</option>

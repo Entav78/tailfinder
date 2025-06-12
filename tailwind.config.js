@@ -8,14 +8,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#f7f7f7",
+        background: "#D7CCC8",
         header: "#53423C",
         'header-hover': '#6c564f',
         primary: "#53423C",
         'primary-hover': '#6c564f',
         secondary: '#A68B7C',
         'secondary-hover': '#7a5d4c',
-        reveal: '#c48b4c',
+        reveal: '#0E1C26',
         'reveal-hover': '#eab308',
         adoptedBadge: '#233511',
         
