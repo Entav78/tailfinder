@@ -40,9 +40,9 @@ export function SearchAndFilter({
   };
 
   return (
-    <div className="flex flex-col gap-4 mb-6">
-      {/* Search */}
-      <div className="relative">
+    <div className="mb-6">
+      {/* Search input with icon */}
+      <div className="relative mb-1 w-full">
         <span className="absolute inset-y-0 left-3 flex items-center">
           <MagnifyingGlassIcon className="w-5 h-5 text-header" />
         </span>
@@ -51,29 +51,30 @@ export function SearchAndFilter({
           placeholder="Search pets..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="input-style pl-10"
+          className="input-style pl-10 w-full"
         />
       </div>
 
-      {/* Show adopted pets */}
-      <label className="flex items-center gap-2 text-sm">
+      {/* Show adopted checkbox */}
+      <label className="flex items-center gap-2 text-sm mb-4 ml-4">
         <input
           type="checkbox"
           checked={showAdopted}
           onChange={(e) => onShowAdoptedChange(e.target.checked)}
+          className="accent-header"
         />
         Show adopted pets
       </label>
 
-      {/* View mode selection */}
-      <div>
-        <label className="block font-medium mb-1">View mode:</label>
+      {/* View mode */}
+      <div className="mb-4">
+        <label className="block font-medium mb-1 ml-4">View mode:</label>
         <select
           value={viewMode}
           onChange={(e) =>
             onViewModeChange(e.target.value as 'all' | 'exclude' | 'include')
           }
-          className="select-style"
+          className="select-style w-full pl-3"
         >
           <option value="all">Show all species</option>
           <option value="exclude">Hide selected species</option>
@@ -81,7 +82,7 @@ export function SearchAndFilter({
         </select>
       </div>
 
-      {/* Exclude checkboxes */}
+      {/* Exclude species checkboxes */}
       {viewMode === 'exclude' && (
         <div>
           <label className="block font-medium mb-1">Hide species:</label>
@@ -107,7 +108,7 @@ export function SearchAndFilter({
         </div>
       )}
 
-      {/* Include checkboxes */}
+      {/* Include species checkboxes */}
       {viewMode === 'include' && (
         <div>
           <label className="block font-medium mb-1">
