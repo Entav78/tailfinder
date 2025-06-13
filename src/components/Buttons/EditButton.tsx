@@ -13,10 +13,6 @@ export const EditButton = ({
 }: EditButtonProps) => {
   const navigate = useNavigate();
 
-  console.log('Rendering EditButton');
-  console.log('adoptionStatus:', adoptionStatus);
-  console.log('ownerCheck:', ownerCheck);
-
   if (!ownerCheck || adoptionStatus?.toLowerCase() !== 'available') return null;
 
   return (

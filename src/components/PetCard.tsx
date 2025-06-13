@@ -24,7 +24,6 @@ export const PetCard = ({ pet }: PetCardProps) => {
 
   const { revealImages } = context;
   const currentUser = useAuthStore((state) => state.user?.name);
-  console.log('currentUser:', currentUser);
 
   const updatedPet = usePetStore((state) =>
     state.pets.find((p) => p.id === pet.id)
@@ -47,11 +46,7 @@ export const PetCard = ({ pet }: PetCardProps) => {
   } = updatedPet;
 
   const ownerCheck = isOwner(updatedPet, currentUser);
-  console.log('updatedPet.owner?.name:', updatedPet.owner?.name);
-  console.log('ownerCheck:', ownerCheck);
   const isAdopted = adoptionStatus === 'Adopted';
-  console.log('adoptionStatus:', adoptionStatus);
-  console.log('isAdopted:', isAdopted);
 
   const handleShare = async (petId: string) => {
     try {

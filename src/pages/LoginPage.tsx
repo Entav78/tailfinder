@@ -57,27 +57,40 @@ const LoginPage = () => {
 
   return (
     <section className="max-w-md mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <Button type="submit" variant="primary">
-          Login
-        </Button>
-      </form>
+      <div className="form-container">
+        <h1 className="heading-xl">Login</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="input-field"
+            />
+          </div>
+
+          <div>
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="input-field"
+            />
+          </div>
+
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
+          <Button type="submit" variant="secondary">
+            Login
+          </Button>
+        </form>
+      </div>
     </section>
   );
 };

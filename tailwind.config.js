@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#D7CCC8",
+        background: "#E8E0DC",
         header: "#53423C",
         'header-hover': '#6c564f',
         primary: "#53423C",
@@ -18,22 +18,28 @@ export default {
         reveal: '#53423C',
         'reveal-hover': '#eab308',
         adoptedBadge: '#233511',
-        
-        // 💡 Tekstfarger
-        text: {
-          light: '#ffffff',
-          dark: '#1a1a1a',
-          subtle: '#e0dcd9',
-          soft: '#f5f5f5',
-        },
       
-        dark: {
-          background: "#1a1a1a",
-          header: "#3a2e2a",
-          primary: "#126c16",
-          text: "#f5f5f5",
-        },  
-      },
+        // Tekstfarger (flatet ut)
+        'text-light': '#2b1e1a',
+        'text-dark': '#1a1a1a',
+        'text-subtle': '#e0dcd9',
+        'text-soft': '#f5f5f5',
+      
+        // Form bakgrunner
+        'form-bg': '#fff8f5',
+        'form-bg-dark': '#2e211d',
+      
+        // Dark mode bakgrunner osv.
+        'dark-bg': '#1a1a1a',
+        'dark-header': '#3a2e2a',
+        'dark-primary': '#126c16',
+      
+        // Input og border
+        'input-light': '#ffffff',
+        'input-dark': '#3b3b3b',
+        'border-light': '#d6c7bf',
+        'border-dark': '#666666',
+      }
     },
   },
   plugins: [],
