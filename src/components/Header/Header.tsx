@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 import logo from '@/assets/img/logo-tailfinder.png';
-import LogoutButton from '@/components/Buttons/LogoutButton';
+import { LogoutButton } from '@/components/Buttons/LogoutButton';
 import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 

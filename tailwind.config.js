@@ -15,15 +15,24 @@ export default {
         'primary-hover': '#6c564f',
         secondary: '#A68B7C',
         'secondary-hover': '#7a5d4c',
-        reveal: '#0E1C26',
+        reveal: '#53423C',
         'reveal-hover': '#eab308',
         adoptedBadge: '#233511',
         
+        // 💡 Tekstfarger
+        text: {
+          light: '#ffffff',
+          dark: '#1a1a1a',
+          subtle: '#e0dcd9',
+          soft: '#f5f5f5',
+        },
+      
         dark: {
           background: "#1a1a1a",
           header: "#3a2e2a",
           primary: "#126c16",
-        }
+          text: "#f5f5f5",
+        },  
       },
     },
   },

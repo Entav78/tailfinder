@@ -45,7 +45,7 @@ const PetDetailPage = () => {
 
   return (
     <section className="max-w-3xl mx-auto p-4">
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 shadow rounded-lg">
         {image?.url ? (
           <img
             src={image.url}
@@ -96,7 +96,7 @@ const PetDetailPage = () => {
           )}
 
           {!isAdopted && userIsOwner && (
-            <Link to={`/pets/edit/${updatedPet.id}`}>
+            <Link to={`/manage/${updatedPet.id}`}>
               <Button variant="secondary">Edit Pet</Button>
             </Link>
           )}

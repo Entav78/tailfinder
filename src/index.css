@@ -2,5 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .text-body {
+    @apply text-text-base;
+  }
+
+  .text-muted {
+    @apply text-text-muted;
+  }
+
+  .text-light {
+    @apply text-text-light;
+  }
+
+  .text-heading {
+    @apply text-primary;
+  }
+
+  .text-inverted {
+    @apply text-white;
+  }
+
+  .text-success {
+    @apply text-text-success;
+  }
+
+  .text-danger {
+    @apply text-text-danger;
+  }
+}
 
 

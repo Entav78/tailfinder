@@ -29,7 +29,9 @@ const OwnAdoptionRequests = ({ ownRequests, allPets }: Props) => {
             )}
             <div>
               <p className="font-semibold text-lg">{pet?.name}</p>
-              <p className="text-sm text-gray-500">{pet?.breed}</p>
+              <p className="text-sm text-gray-500">
+                {pet && pet.breed !== 'Unknown' ? pet.breed : ''}
+              </p>
               <p className="text-sm text-gray-600 mt-1">
                 Status: <strong>{r.status}</strong>
               </p>

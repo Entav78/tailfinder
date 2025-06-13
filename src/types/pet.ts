@@ -21,11 +21,11 @@ export interface Pet {
 }
 
 export function isOwner(pet: Pet, currentUserName?: string): boolean {
-  return pet.owner?.name === currentUserName;
-}
+  if (!currentUserName) return false;
 
-{
-  /* for later use if I need it
-export type { Pet };
-export { isOwner };*/
+  if (typeof pet.owner === 'string') {
+    return pet.owner === currentUserName;
+  }
+
+  return pet.owner?.name === currentUserName;
 }

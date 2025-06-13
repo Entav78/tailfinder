@@ -30,5 +30,3 @@ export const AdoptButton = ({ pet }: AdoptButtonProps) => {
     </Button>
   );
 };
-
-export default AdoptButton;

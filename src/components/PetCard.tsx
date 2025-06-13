@@ -3,9 +3,9 @@ import { RevealContext } from '@/context/RevealContext';
 import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
-import { Button } from '@/components/Buttons/Button';
 import { isOwner } from '@/types/pet';
 import { AdoptButton } from '@/components/Buttons/AdoptButton';
+import { EditButton } from '@/components/Buttons/EditButton';
 import { usePetStore } from '@/store/petStore';
 import { toast } from 'react-hot-toast';
 
@@ -13,7 +13,7 @@ interface PetCardProps {
   pet: Pet;
 }
 
-const PetCard = ({ pet }: PetCardProps) => {
+export const PetCard = ({ pet }: PetCardProps) => {
   const context = useContext(RevealContext);
 
   if (!context) {
@@ -24,6 +24,7 @@ const PetCard = ({ pet }: PetCardProps) => {
 
   const { revealImages } = context;
   const currentUser = useAuthStore((state) => state.user?.name);
+  console.log('currentUser:', currentUser);
 
   const updatedPet = usePetStore((state) =>
     state.pets.find((p) => p.id === pet.id)
@@ -46,7 +47,11 @@ const PetCard = ({ pet }: PetCardProps) => {
   } = updatedPet;
 
   const ownerCheck = isOwner(updatedPet, currentUser);
+  console.log('updatedPet.owner?.name:', updatedPet.owner?.name);
+  console.log('ownerCheck:', ownerCheck);
   const isAdopted = adoptionStatus === 'Adopted';
+  console.log('adoptionStatus:', adoptionStatus);
+  console.log('isAdopted:', isAdopted);
 
   const handleShare = async (petId: string) => {
     try {
@@ -94,7 +99,9 @@ const PetCard = ({ pet }: PetCardProps) => {
           </button>
         </div>
 
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{breed}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
+          {breed !== 'Unknown' ? breed : ''}
+        </p>
 
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
           Age: {age} • Size: {size} • Color: {color}
@@ -115,14 +122,18 @@ const PetCard = ({ pet }: PetCardProps) => {
         )}
       </Link>
 
-      {!isAdopted && (
-        <div className="mt-4 flex gap-2">
-          {currentUser && !ownerCheck && <AdoptButton pet={updatedPet} />}
-          {ownerCheck && <Button variant="secondary">Edit</Button>}
-        </div>
+      <div className="mt-4 flex gap-2">
+        {currentUser && !ownerCheck && !isAdopted && (
+          <AdoptButton pet={updatedPet} />
+        )}
+      </div>
+      {ownerCheck && !isAdopted && (
+        <EditButton
+          petId={updatedPet.id}
+          adoptionStatus={updatedPet.adoptionStatus}
+          ownerCheck={ownerCheck}
+        />
       )}
     </article>
   );
 };
-
-export default PetCard;

@@ -2,7 +2,7 @@ import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-const LogoutButton = ({ onClickDone }: { onClickDone?: () => void }) => {
+export const LogoutButton = ({ onClickDone }: { onClickDone?: () => void }) => {
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
 
@@ -22,5 +22,3 @@ const LogoutButton = ({ onClickDone }: { onClickDone?: () => void }) => {
     </button>
   );
 };
-
-export default LogoutButton;

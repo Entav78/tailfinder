@@ -1,10 +1,11 @@
 import { useEffect, useContext, useState, useMemo } from 'react';
-import PetCard from '@/components/PetCard';
+import { PetCard } from '@/components/PetCard';
 import { RevealContext } from '@/context/RevealContext';
 import { Button } from '@/components/Buttons/Button';
 import { usePetStore } from '@/store/petStore';
 import { SearchAndFilter } from '@/components/SearchAndFilter/SearchAndFilter';
 import { filterPets } from '@/utils/filterPets';
+import { Pagination } from '@/components/Pagination';
 
 const HomePage = () => {
   const context = useContext(RevealContext);
@@ -25,9 +26,21 @@ const HomePage = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [showAdopted, setShowAdopted] = useState(() => {
+    const saved = localStorage.getItem('showAdopted');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
   useEffect(() => {
     localStorage.setItem('excludedSpecies', JSON.stringify(excludedSpecies));
   }, [excludedSpecies]);
+
+  useEffect(() => {
+    localStorage.setItem('showAdopted', JSON.stringify(showAdopted));
+  }, [showAdopted]);
 
   useEffect(() => {
     fetchPets();
@@ -40,15 +53,6 @@ const HomePage = () => {
     });
     return Array.from(speciesSet).sort();
   }, [pets]);
-
-  const [showAdopted, setShowAdopted] = useState(() => {
-    const saved = localStorage.getItem('showAdopted');
-    return saved ? JSON.parse(saved) : false;
-  });
-
-  useEffect(() => {
-    localStorage.setItem('showAdopted', JSON.stringify(showAdopted));
-  }, [showAdopted]);
 
   const filteredPets = useMemo(() => {
     return filterPets(
@@ -67,6 +71,17 @@ const HomePage = () => {
     excludedSpecies,
     showAdopted,
   ]);
+
+  useEffect(() => {
+    setCurrentPage(1); // Reset til første side ved søk eller filtrering
+  }, [searchTerm, viewMode, includedSpecies, excludedSpecies, showAdopted]);
+
+  const totalPages = Math.ceil(filteredPets.length / itemsPerPage);
+
+  const paginatedPets = filteredPets.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   if (!pets.length) return <p className="text-center p-4">Loading pets...</p>;
 
@@ -93,10 +108,17 @@ const HomePage = () => {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filteredPets.map((pet) => (
+        {paginatedPets.map((pet) => (
           <PetCard key={pet.id} pet={pet} />
         ))}
       </div>
+
+      {/* Pagination */}
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };
