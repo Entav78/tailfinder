@@ -33,6 +33,8 @@ const Header = () => {
               <img
                 src={logo}
                 alt="TailFinder Logo"
+                width="80"
+                height="80"
                 className="h-20 w-auto rounded-full"
               />
             </Link>
@@ -44,6 +46,8 @@ const Header = () => {
               <img
                 src={logo}
                 alt="TailFinder Logo"
+                width="80"
+                height="80"
                 className="h-20 w-auto rounded-full"
               />
             </Link>

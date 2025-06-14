@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .text-default {
+    @apply text-text-base dark:text-text-base-dark;
+  }
+
   .text-body {
     @apply text-text-base;
   }
@@ -34,14 +38,19 @@
 
 @layer components {
   .heading-xl {
-    @apply text-2xl font-bold mb-4 text-text-dark dark:text-text-light;
+    @apply text-2xl font-bold mb-4 text-text-dark dark:text-secondary;
   }
 }
 
 @layer components {
   .form-label {
-    @apply block mb-1 text-text-light dark:text-text-dark;
+    @apply block mb-1 text-text-base dark:text-secondary;
   }
+
+  .form-heading {
+    @apply text-2xl font-bold mb-4 text-text-dark dark:text-text-base-dark;
+  }
+
 }
 
 @layer components {
@@ -55,11 +64,28 @@
 @layer components {
   .input-field {
     @apply w-full px-4 py-2 rounded-md 
-    bg-input-light text-text-dark 
-    border border-border-light 
-    dark:bg-input-dark dark:text-text-light 
-    dark:border-border-dark 
-    focus:outline-none focus:ring-2 focus:ring-secondary;
+      bg-input-light text-text-dark
+      border border-border-light 
+      dark:bg-input-dark dark:text-white
+      dark:border-border-dark 
+      focus:outline-none focus:ring-2 focus:ring-secondary;
+  
+    /* Autofill styling for light mode */
+  .input-field:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+  }
+
+  /* Autofill styling for dark mode */
+  .dark .input-field:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #3b3b3b inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+}
+  
+
+  .input-field::placeholder {
+    @apply text-text-placeholder;
   }
 }
 

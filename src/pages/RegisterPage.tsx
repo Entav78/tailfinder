@@ -50,7 +50,9 @@ const RegisterPage = () => {
           <div>
             <label className="form-label">Name</label>
             <input
+              id="name"
               type="text"
+              name="name"
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -62,7 +64,9 @@ const RegisterPage = () => {
           <div>
             <label className="form-label">Email</label>
             <input
+              id="email"
               type="email"
+              name="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +78,9 @@ const RegisterPage = () => {
           <div>
             <label className="form-label">Password</label>
             <input
+              id="password"
               type="password"
+              name="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -85,7 +91,7 @@ const RegisterPage = () => {
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
-          <Button type="submit" variant="secondary">
+          <Button type="submit" variant="form">
             Register
           </Button>
         </form>

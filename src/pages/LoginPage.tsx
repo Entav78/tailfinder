@@ -63,7 +63,9 @@ const LoginPage = () => {
           <div>
             <label className="form-label">Email</label>
             <input
+              id="email"
               type="email"
+              name="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -75,7 +77,9 @@ const LoginPage = () => {
           <div>
             <label className="form-label">Password</label>
             <input
+              id="password"
               type="password"
+              name="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +90,7 @@ const LoginPage = () => {
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
-          <Button type="submit" variant="secondary">
+          <Button type="submit" variant="form">
             Login
           </Button>
         </form>

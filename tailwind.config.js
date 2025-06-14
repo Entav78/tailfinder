@@ -20,17 +20,23 @@ export default {
         adoptedBadge: '#233511',
       
         // Tekstfarger (flatet ut)
+        'text-base': '#1a1a1a',    
+        'text-base-dark': '#f5f5f5',
+        'text-muted': '#6b4d43', 
         'text-light': '#2b1e1a',
         'text-dark': '#1a1a1a',
         'text-subtle': '#e0dcd9',
         'text-soft': '#f5f5f5',
+        'text-placeholder': '#999999',
+        'text-button-light': '#ffffff',
+          
       
         // Form bakgrunner
-        'form-bg': '#fff8f5',
-        'form-bg-dark': '#2e211d',
+        'form-bg': '#fef6f2',
+        'form-bg-dark': '#1e1e1e',
       
         // Dark mode bakgrunner osv.
-        'dark-bg': '#1a1a1a',
+        'dark-bg': '#242424',
         'dark-header': '#3a2e2a',
         'dark-primary': '#126c16',
       
