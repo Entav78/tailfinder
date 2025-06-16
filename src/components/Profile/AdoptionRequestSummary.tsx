@@ -12,7 +12,10 @@ const AdoptionRequestSummary = ({ pet, requests }: Props) => {
   if (count === 0) return null;
 
   return (
-    <p className="text-xs text-gray-500 mt-1">
+    <p
+      className="text-text-muted dark:text-text-subtle
+ mt-1"
+    >
       {count} adoption request{count > 1 && 's'}
     </p>
   );

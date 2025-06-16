@@ -18,7 +18,7 @@ const OwnAdoptionRequests = ({ ownRequests, allPets }: Props) => {
         return (
           <div
             key={`${r.petId}-${r.requesterName}`}
-            className="p-4 bg-white dark:bg-gray-800 rounded shadow flex items-center gap-4"
+            className="p-4 bg-card dark:bg-darkCard border border-border-light dark:border-border-dark rounded shadow flex items-center gap-4"
           >
             {pet?.image?.url && (
               <img
@@ -28,11 +28,13 @@ const OwnAdoptionRequests = ({ ownRequests, allPets }: Props) => {
               />
             )}
             <div>
-              <p className="font-semibold text-lg">{pet?.name}</p>
-              <p className="text-sm text-gray-500">
+              <p className="font-semibold text-lg text-text-dark dark:text-text-base-dark">
+                {pet?.name}
+              </p>
+              <p className="text-sm text-text-muted dark:text-text-subtle">
                 {pet && pet.breed !== 'Unknown' ? pet.breed : ''}
               </p>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm mt-1 text-text-muted dark:text-text-subtle">
                 Status: <strong>{r.status}</strong>
               </p>
             </div>

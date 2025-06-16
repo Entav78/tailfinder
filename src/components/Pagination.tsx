@@ -19,8 +19,8 @@ export const Pagination = ({
           onClick={() => onPageChange(index + 1)}
           className={`px-4 py-2 rounded ${
             currentPage === index + 1
-              ? 'bg-header text-white font-bold'
-              : 'bg-gray-300 text-gray-800 hover:bg-gray-400'
+              ? 'bg-header text-text-button-light font-bold'
+              : 'bg-secondary text-text-dark hover:bg-secondary-hover'
           }`}
         >
           {index + 1}

@@ -8,8 +8,8 @@ interface Props {
 
 const AdoptionRequestCard = ({ request, onUpdate }: Props) => {
   return (
-    <div className="mt-4 p-3 border rounded bg-gray-50 dark:bg-gray-700">
-      <p className="text-sm mb-1">
+    <div className="mt-4 p-3 border rounded bg-card dark:bg-darkCard">
+      <p className="text-text-muted dark:text-text-subtle text-sm mb-1">
         <strong>{request.requesterName}</strong> wants to adopt this pet.
       </p>
       {request.status === 'pending' ? (
@@ -22,7 +22,7 @@ const AdoptionRequestCard = ({ request, onUpdate }: Props) => {
           </Button>
         </div>
       ) : (
-        <p className="text-sm mt-2 text-gray-600">
+        <p className="text-sm mt-2 text-text-muted dark:text-text-subtle">
           You {request.status} this request.
         </p>
       )}

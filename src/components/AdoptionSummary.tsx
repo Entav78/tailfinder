@@ -12,9 +12,11 @@ export const AdoptionSummary = ({ pet, requests }: Props) => {
   return (
     <div>
       <p className="font-semibold text-lg">{pet.name}</p>
-      <p className="text-sm text-gray-500">{pet.breed}</p>
+      <p className="text-sm text-text-muted dark:text-text-subtle">
+        {pet.breed}
+      </p>
       {requestCount > 0 && (
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-text-muted dark:text-text-subtle mt-1">
           {requestCount} adoption request{requestCount > 1 && 's'}
         </p>
       )}
