@@ -41,7 +41,11 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
   console.log('🐾 YourPetCard – adoptionStatus:', updatedPet?.adoptionStatus);
 
   return (
-    <div className="p-4 bg-card dark:bg-darkCard rounded shadow flex gap-4 items-start">
+    <div
+      className={`p-4 bg-card dark:bg-darkCard rounded shadow flex gap-4 items-start ${
+        updatedPet.adoptionStatus === 'Adopted' ? 'opacity-96' : ''
+      }`}
+    >
       {updatedPet.image?.url && (
         <img
           src={updatedPet.image.url}
