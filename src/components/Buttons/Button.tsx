@@ -23,37 +23,37 @@ export const Button: React.FC<ButtonProps> = ({
   px-4 
   py-2 
   rounded 
-  text-white 
   font-medium 
   transition-colors 
   duration-300
+
 `;
 
   const variantStyles = {
     primary: `
-        bg-primary 
-        hover:bg-primary-hover 
-        text-white
-      `,
+    bg-primary 
+    hover:bg-primary-hover
+    text-text-button-light
+  `,
     secondary: `
-        bg-secondary 
-        hover:bg-secondary-hover 
-        text-white 
-        text-text-button-light
-      `,
+    bg-secondary 
+    hover:bg-secondary-hover
+    text-text-base 
+    border-dark
+  `,
     reveal: `
-        bg-reveal 
-        hover:bg-reveal-hover 
-        text-black
-      `,
+    bg-reveal
+    hover:bg-reveal-hover 
+    text-text-button-light
+  `,
     form: `
-        bg-secondary 
-        hover:bg-secondary-hover 
-        text-inherit 
-        border border-border-light 
-        dark:text-text-dark 
-        dark:border-border-dark
-      `,
+    bg-secondary 
+    hover:bg-secondary-hover 
+    text-inherit 
+    border border-border-light 
+    dark:text-text-dark 
+    dark:border-border-dark
+  `,
   };
 
   const combinedClasses = classNames(

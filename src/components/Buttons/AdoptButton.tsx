@@ -25,7 +25,7 @@ export const AdoptButton = ({ pet }: AdoptButtonProps) => {
   };
 
   return (
-    <Button variant="primary" onClick={handleAdopt}>
+    <Button variant="primary" className="w-full" onClick={handleAdopt}>
       Adopt
     </Button>
   );

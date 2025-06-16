@@ -51,7 +51,7 @@ export function SearchAndFilter({
           placeholder="Search pets..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="input-style pl-10 w-full rounded"
+          className="input-style pl-10 w-full rounded dark:text-text-base dark:placeholder-text-placeholder"
         />
       </div>
 
@@ -68,13 +68,16 @@ export function SearchAndFilter({
 
       {/* View mode */}
       <div className="mb-4">
-        <label className="block font-medium mb-1 ml-4">View mode:</label>
+        <label htmlFor="viewMode" className="block font-medium mb-1 ml-4">
+          View mode:
+        </label>
         <select
+          id="viewMode"
           value={viewMode}
           onChange={(e) =>
             onViewModeChange(e.target.value as 'all' | 'exclude' | 'include')
           }
-          className="select-style w-full pl-3 rounded"
+          className="select-style w-full pl-3 rounded dark:text-text-base dark:placeholder-text-placeholder"
         >
           <option value="all">Show all species</option>
           <option value="exclude">Hide selected species</option>

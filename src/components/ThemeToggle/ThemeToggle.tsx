@@ -29,7 +29,7 @@ export function ThemeToggle({ onClickDone }: ThemeToggleProps) {
   return (
     <button
       onClick={toggleTheme}
-      className="hover:underline text-sm sm:text-base"
+      className="hover:underline text-sm sm:text-base whitespace-nowrap"
     >
       Theme Toggle
     </button>

@@ -102,7 +102,7 @@ const HomePage = () => {
       />
 
       <div className="flex justify-end mb-4">
-        <Button onClick={() => setRevealImages(!revealImages)} variant="reveal">
+        <Button onClick={() => setRevealImages(!revealImages)} variant="reveal" >
           {revealImages ? 'Hide Images' : 'Reveal All Images'}
         </Button>
       </div>

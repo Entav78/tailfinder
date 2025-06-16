@@ -22,33 +22,37 @@ const Header = () => {
   const alertCount = useAdoptionRequestStore((state) =>
     user?.name ? state.getAlertCountForUser(user.name) : 0
   );
+  const menuLinkClass =
+    'block w-full text-left px-4 py-1 hover:underline transition';
 
   return (
     <>
       <header className="bg-header text-white px-4 py-6 shadow-md relative z-50">
+        {/* <div className="absolute top-0 left-0 w-16 h-16 bg-[url('/img/paw-dark.svg')] bg-no-repeat bg-contain opacity-20 pointer-events-none" />
+         */}
         <div className="relative flex items-center justify-between w-full">
           {/* ✅ Logo small screens */}
           <div className="absolute left-1/2 transform -translate-x-1/2 sm:hidden">
-            <Link to="/">
+            <Link to="/" className="group flex items-center">
               <img
                 src={logo}
                 alt="TailFinder Logo"
                 width="80"
                 height="80"
-                className="h-20 w-auto rounded-full"
+                className="h-20 w-auto transition-transform duration-300 ease-in-out group-hover:scale-105 hover:rotate-1"
               />
             </Link>
           </div>
 
           {/* ✅ Logo large screens */}
           <div className="hidden sm:block">
-            <Link to="/">
+            <Link to="/" className="group flex items-center">
               <img
                 src={logo}
                 alt="TailFinder Logo"
                 width="80"
                 height="80"
-                className="h-20 w-auto rounded-full"
+                className="h-20 w-auto transition-transform duration-300 ease-in-out group-hover:scale-105 hover:rotate-1"
               />
             </Link>
           </div>
@@ -169,7 +173,7 @@ const Header = () => {
             <Link
               to="/"
               onClick={() => setMenuOpen(false)}
-              className="hover:underline"
+              className={menuLinkClass}
             >
               Home
             </Link>
@@ -178,7 +182,7 @@ const Header = () => {
             <Link
               to="/profile"
               onClick={() => setMenuOpen(false)}
-              className="hover:underline relative"
+              className={menuLinkClass}
             >
               Profile
               {isLoggedIn && alertCount > 0 && (
@@ -192,7 +196,7 @@ const Header = () => {
             <Link
               to="/manage"
               onClick={() => setMenuOpen(false)}
-              className="hover:underline"
+              className={menuLinkClass}
             >
               Manage
             </Link>
@@ -200,7 +204,10 @@ const Header = () => {
 
           {accessToken ? (
             <li>
-              <LogoutButton onClickDone={() => setMenuOpen(false)} />
+              <LogoutButton
+                onClickDone={() => setMenuOpen(false)}
+                className={menuLinkClass}
+              />
             </li>
           ) : (
             <>
@@ -208,7 +215,7 @@ const Header = () => {
                 <Link
                   to="/login"
                   onClick={() => setMenuOpen(false)}
-                  className="hover:underline"
+                  className={menuLinkClass}
                 >
                   Login
                 </Link>
@@ -217,7 +224,7 @@ const Header = () => {
                 <Link
                   to="/register"
                   onClick={() => setMenuOpen(false)}
-                  className="hover:underline"
+                  className={menuLinkClass}
                 >
                   Register
                 </Link>

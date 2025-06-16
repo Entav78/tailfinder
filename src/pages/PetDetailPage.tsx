@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Button } from '@/components/Buttons/Button';
+import { useParams } from 'react-router-dom';
+import { EditButton } from '@/components/Buttons/EditButton';
 import { isOwner } from '@/types/pet';
 import { useAuthStore } from '@/store/authStore';
 import { usePetStore } from '@/store/petStore';
@@ -41,6 +41,7 @@ const PetDetailPage = () => {
     owner,
   } = updatedPet;
 
+  const ownerCheck = isOwner(updatedPet, currentUser);
   const isAdopted = adoptionStatus === 'Adopted';
 
   return (
@@ -95,10 +96,13 @@ const PetDetailPage = () => {
             </p>
           )}
 
-          {!isAdopted && userIsOwner && (
-            <Link to={`/manage/${updatedPet.id}`}>
-              <Button variant="secondary">Edit Pet</Button>
-            </Link>
+          {ownerCheck && !isAdopted && (
+            <EditButton
+              petId={updatedPet.id}
+              adoptionStatus={updatedPet.adoptionStatus}
+              ownerCheck={ownerCheck}
+              className="w-full"
+            />
           )}
 
           {!isAdopted && !userIsOwner && (

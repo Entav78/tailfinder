@@ -16,7 +16,7 @@ export default {
         secondary: '#A68B7C',
         'secondary-hover': '#7a5d4c',
         reveal: '#53423C',
-        'reveal-hover': '#eab308',
+        'reveal-hover': '#8c705f',
         adoptedBadge: '#233511',
       
         // Tekstfarger (flatet ut)
@@ -45,6 +45,10 @@ export default {
         'input-dark': '#3b3b3b',
         'border-light': '#d6c7bf',
         'border-dark': '#666666',
+
+        // Card
+        'card': '#ffffff',
+        'darkCard': '#2d2d2d',
       }
     },
   },
