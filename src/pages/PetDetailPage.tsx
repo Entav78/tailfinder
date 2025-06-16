@@ -46,7 +46,7 @@ const PetDetailPage = () => {
 
   return (
     <section className="max-w-3xl mx-auto p-4">
-      <div className="bg-white dark:bg-gray-800 shadow rounded-lg">
+      <div className="bg-card dark:bg-darkCard shadow rounded-lg">
         {image?.url ? (
           <img
             src={image.url}
@@ -54,44 +54,50 @@ const PetDetailPage = () => {
             className="w-full h-64 object-cover"
           />
         ) : (
-          <div className="w-full h-64 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500">
+          <div className="w-full h-64 bg-border-light dark:bg-border-dark flex items-center justify-center text-text-placeholder">
             No image available
           </div>
         )}
 
-        <div className="p-6">
-          <h1 className="text-3xl font-bold mb-2">{name}</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+        <div className="p-6 bg-card dark:bg-darkCard rounded shadow">
+          <h1 className="text-3xl font-bold mb-2 text-text-dark dark:text-text-base-dark">
+            {name}
+          </h1>
+
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Species:</strong> {species}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Breed:</strong> {breed}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Age:</strong> {age}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Gender:</strong> {gender}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Size:</strong> {size}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Color:</strong> {color}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Location:</strong> {location}
           </p>
-          <p className="text-gray-600 dark:text-gray-300 mb-1">
+          <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Status:</strong>{' '}
             <span className="font-semibold">
               {isAdopted ? 'Adopted' : 'Available'}
             </span>
           </p>
-          <p className="text-gray-700 dark:text-gray-200 mt-4">{description}</p>
+
+          <p className="text-text-light dark:text-text-soft mt-4">
+            {description}
+          </p>
 
           {currentUser && owner?.name && (
-            <p className="text-gray-500 dark:text-gray-300 mt-2 text-sm">
+            <p className="text-text-dark dark:text-text-subtle mt-2 text-sm">
               <strong>Owner:</strong> {owner.name}
             </p>
           )}
@@ -112,7 +118,7 @@ const PetDetailPage = () => {
           )}
 
           {isAdopted && userIsOwner && (
-            <p className="mt-4 font-medium text-green-600 dark:text-green-400">
+            <p className="mt-4 font-medium text-adoptedBadge">
               Adopted by: {findRequesterName(updatedPet.id)}
             </p>
           )}

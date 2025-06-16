@@ -116,7 +116,7 @@ export const PetCard = ({ pet }: PetCardProps) => {
           )}
 
           {isAdopted && (
-            <div className="absolute top-2 right-2 bg-adoptedBadge text-white text-xs px-2 py-1 rounded shadow">
+            <div className="absolute top-2 right-2 bg-adoptedBadge text-text-button-light text-xs px-2 py-1 rounded shadow">
               Adopted
             </div>
           )}

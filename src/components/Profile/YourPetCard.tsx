@@ -39,33 +39,51 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
   const ownerCheck = isOwner(updatedPet, currentUser);
 
   return (
-    <div className="p-4 bg-white dark:bg-gray-800 rounded shadow">
-      <div className="flex justify-between items-center">
-        <div>
-          <p className="font-semibold text-lg">{updatedPet.name}</p>
-          <p className="text-sm text-gray-500">
-            {updatedPet && updatedPet.breed !== 'Unknown'
-              ? updatedPet.breed
-              : ''}
-          </p>
-          <AdoptionRequestSummary pet={updatedPet} requests={requests} />
-        </div>
-        <EditButton
-          petId={updatedPet.id}
-          adoptionStatus={updatedPet.adoptionStatus}
-          ownerCheck={ownerCheck}
+    <div className="p-4 bg-card dark:bg-darkCard rounded shadow flex gap-4 items-start">
+      {updatedPet.image?.url && (
+        <img
+          src={updatedPet.image.url}
+          alt={updatedPet.image.alt || updatedPet.name}
+          className="w-16 h-16 object-cover rounded"
         />
-      </div>
+      )}
 
-      {petRequests.map((r) => (
-        <AdoptionRequestCard
-          key={r.requesterName}
-          request={r}
-          onUpdate={(status) =>
-            handleUpdate(updatedPet.id, r.requesterName, status)
-          }
-        />
-      ))}
+      <div className="flex-1">
+        <div className="flex justify-between items-start">
+          <div>
+            <p className="font-semibold text-lg text-text-dark dark:text-text-base-dark">
+              {updatedPet.name}
+            </p>
+
+            <p className="text-sm text-text-muted dark:text-text-subtle">
+              {updatedPet.breed !== 'Unknown' ? updatedPet.breed : ''}
+            </p>
+            <AdoptionRequestSummary pet={updatedPet} requests={requests} />
+          </div>
+
+          {ownerCheck && (
+            <EditButton
+              petId={updatedPet.id}
+              adoptionStatus={updatedPet.adoptionStatus}
+              ownerCheck={ownerCheck}
+              className="ml-4"
+            />
+          )}
+        </div>
+
+        {/* Historikk over adopsjonsforespørsler */}
+        <div className="mt-4 space-y-2">
+          {petRequests.map((r) => (
+            <AdoptionRequestCard
+              key={r.requesterName}
+              request={r}
+              onUpdate={(status) =>
+                handleUpdate(updatedPet.id, r.requesterName, status)
+              }
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
