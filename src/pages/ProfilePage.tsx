@@ -45,7 +45,6 @@ const ProfilePage = () => {
               handleUpdate={handleUpdate}
             />
           ))}
-              
         </div>
       )}
 

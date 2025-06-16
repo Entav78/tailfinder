@@ -8,6 +8,7 @@ import { AdoptButton } from '@/components/Buttons/AdoptButton';
 import { EditButton } from '@/components/Buttons/EditButton';
 import { usePetStore } from '@/store/petStore';
 import { toast } from 'react-hot-toast';
+import { AdoptedBadge } from './AdoptedBadge';
 
 interface PetCardProps {
   pet: Pet;
@@ -62,7 +63,7 @@ export const PetCard = ({ pet }: PetCardProps) => {
   return (
     <article
       className={`relative bg-card dark:bg-darkCard shadow rounded p-4 flex flex-col justify-between min-h-[380px] transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl ${
-        isAdopted ? 'opacity-60' : ''
+        isAdopted ? 'opacity-80' : ''
       }`}
     >
       <div className="grow">
@@ -116,9 +117,7 @@ export const PetCard = ({ pet }: PetCardProps) => {
           )}
 
           {isAdopted && (
-            <div className="absolute top-2 right-2 bg-adoptedBadge text-text-button-light text-xs px-2 py-1 rounded shadow">
-              Adopted
-            </div>
+            <AdoptedBadge className="absolute top-2 right-2 shadow" />
           )}
         </Link>
       </div>

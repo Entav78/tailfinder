@@ -7,6 +7,7 @@ import type { AdoptionRequest } from '@/store/adoptionRequestStore';
 import AdoptionRequestSummary from './AdoptionRequestSummary';
 import AdoptionRequestCard from './AdoptionRequestCard';
 import { EditButton } from '@/components/Buttons/EditButton';
+import { AdoptedBadge } from '@/components/AdoptedBadge';
 
 interface Props {
   pet: Pet;
@@ -37,6 +38,7 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
 
   const petRequests = requests.filter((r) => r.petId === updatedPet.id);
   const ownerCheck = isOwner(updatedPet, currentUser);
+  console.log('🐾 YourPetCard – adoptionStatus:', updatedPet?.adoptionStatus);
 
   return (
     <div className="p-4 bg-card dark:bg-darkCard rounded shadow flex gap-4 items-start">
@@ -68,6 +70,10 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
               ownerCheck={ownerCheck}
               className="ml-4"
             />
+          )}
+
+          {updatedPet.adoptionStatus === 'Adopted' && (
+            <AdoptedBadge className="mt-2" />
           )}
         </div>
 
