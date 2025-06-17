@@ -1,82 +1,121 @@
-# 🐾 Tailfinder – Pet Adoption App
+# TailFinder – Pet Adoption App 🐾
 
-## Limitations of Adoption Requests (Frontend-only)
-
-Due to the lack of backend data persistence...
-
-## Adoption request limitations
-
-Due to the lack of a backend with shared data persistence, adoption requests are handled using client-side state (Zustand). This means that:
-
-- Requests are not stored across sessions or shared between browsers
-- If you log out and back in within the same browser tab, all features work as expected
-- Simulating multiple users requires using different tabs with controlled login/logout behavior
-
-A potential workaround could be to persist data using `localStorage`, but this would still not support real multi-user interaction across devices. Since this is a frontend-focused project, I have chosen not to implement localStorage or a custom backend, and instead focus on demonstrating working logic and state flows within the frontend.
+Welcome to **TailFinder**, a user-friendly frontend application that lets users browse, add, and adopt pets. This project is built as part of the Noroff Semester Project 2 (Resit) and demonstrates frontend skills including authentication, state management, dynamic filtering, pagination, and user interaction.
 
 ---
 
-## Project Setup (Default Vite Template Info)
+## 📄 Table of Contents
 
-The following is the default Vite/React/TypeScript project template...
+* [Demo](#demo)
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [Setup & Installation](#setup--installation)
+* [Folder Structure](#folder-structure)
+* [Known Limitations](#known-limitations)
+* [Author](#author)
 
+---
 
+## 🎥 Demo
 
+Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 
+---
 
+## ✨ Features
 
+* User registration and login via Noroff API
+* Add, edit, and delete pets (authenticated users only)
+* Reveal/hide pet images for accessibility or phobia sensitivity
+* Filter pets by species (with alias support, e.g. "snake" hides "python")
+* Search bar with dynamic filtering
+* Pagination for improved UX
+* Dark mode toggle
+* Responsive design for mobile and desktop
+* Humor-friendly code and hidden Spider-Man references ☺️
 
-# React + TypeScript + Vite
+---
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Tech Stack
 
-Currently, two official plugins are available:
+* [React](https://react.dev/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Vite](https://vitejs.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Zustand](https://github.com/pmndrs/zustand)
+* [React Router](https://reactrouter.com/)
+* [React Hot Toast](https://react-hot-toast.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Setup & Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# 1. Clone the repository
+$ git clone https://github.com/your-username/tailfinder.git
+$ cd tailfinder
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# 2. Install dependencies
+$ npm install
+
+# 3. Create a .env file
+VITE_API_KEY=your_noroff_api_key_here
+
+# 4. Start the dev server
+$ npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🗂️ Folder Structure
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+src/
+├── components/
+├── context/
+├── hooks/
+├── pages/
+├── store/
+├── types/
+├── utils/
+└── App.tsx
+```
+
+---
+
+## ⚠️ Known Limitations
+
+### 🐾 Adoption Requests (Local Only)
+
+Due to the frontend-only nature of this exam, adoption requests are **not persisted to the backend** and do not sync between users or browsers.
+
+Instead, they are stored using [Zustand](https://github.com/pmndrs/zustand) with `localStorage` under the hood.
+
+#### Limitations:
+
+* Adoption requests are only visible **in the browser and session where they were created**.
+* Owners will not see incoming requests unless using the same localStorage state.
+* If you clear site data or switch browser, requests will disappear.
+* This is intentional and documented as part of the frontend scope.
+
+✨ However, the `adoptionStatus` of each pet **is updated via Noroff's API** and *does* sync globally. This ensures that pets marked as **Adopted** are consistently filtered or hidden for all users.
+
+---
+
+## 👤 Author
+
+**Hilde-Kathrine**
+Frontend Student @ Noroff
+[GitHub Profile](https://github.com/Entav78)
+
+---
+
+> "With great filtering comes great responsibility."
+> — Spider-Man, probably debugging `speciesAliasMap.ts`
+
+---
+
+## Credits
+
+- Guidance and technical assistance provided by ChatGPT (OpenAI), used as a development assistant during the project.
+- Thanks for helping debug species filters, toggle dark mode, and keep the fun alive with Spider-Man jokes.
