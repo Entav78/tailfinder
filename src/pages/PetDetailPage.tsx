@@ -96,10 +96,16 @@ const PetDetailPage = () => {
             {description}
           </p>
 
-          {currentUser && owner?.name && (
-            <p className="text-text-dark dark:text-text-subtle mt-2 text-sm">
-              <strong>Owner:</strong> {owner.name}
+          {isAdopted ? (
+            <p className="text-sm font-medium text-traffic-green dark:text-traffic-green-dark">
+              Adopted by: {findRequesterName(updatedPet.id)}
             </p>
+          ) : (
+            owner?.name && (
+              <p className="text-sm text-text-muted dark:text-text-subtle">
+                <strong>Owner:</strong> {owner.name}
+              </p>
+            )
           )}
 
           {ownerCheck && !isAdopted && (
@@ -115,12 +121,6 @@ const PetDetailPage = () => {
             <div className="mt-4">
               <AdoptButton pet={updatedPet} />
             </div>
-          )}
-
-          {isAdopted && userIsOwner && (
-            <p className="mt-4 font-medium text-adoptedBadge">
-              Adopted by: {findRequesterName(updatedPet.id)}
-            </p>
           )}
         </div>
       </div>

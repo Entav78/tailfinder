@@ -6,6 +6,7 @@ import { getPetByIdUrl, getPetsUrl } from '@/constants/api';
 import type { Pet } from '@/types/pet';
 import { DeleteButton } from '@/components/Buttons/DeleteButton';
 import { Button } from '@/components/Buttons/Button';
+import { NOROFF_API_KEY } from '@/constants/api';
 
 const ManagePetPage = () => {
   const { id } = useParams(); // Bruk kun denne, ikke destrukturer på nytt senere
@@ -66,7 +67,6 @@ const ManagePetPage = () => {
     const url = id ? getPetByIdUrl(id) : getPetsUrl();
     const method = id ? 'PUT' : 'POST';
     const token = useAuthStore.getState().accessToken;
-    const apiKey = import.meta.env.VITE_API_KEY;
 
     // Fjern id ved POST
     const payload = id
@@ -80,7 +80,7 @@ const ManagePetPage = () => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
-          'X-Noroff-API-Key': apiKey,
+          'X-Noroff-API-Key': NOROFF_API_KEY,
         },
         body: JSON.stringify({
           ...payload,

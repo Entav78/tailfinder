@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-header text-white px-4 py-6 shadow-md relative z-50">
+      <header className="bg-header text-white px-4 py-6 shadow-md sticky top-0 z-50">
         {/* <div className="absolute top-0 left-0 w-16 h-16 bg-[url('/img/paw-dark.svg')] bg-no-repeat bg-contain opacity-20 pointer-events-none" />
          */}
         <div className="relative flex items-center justify-between w-full">

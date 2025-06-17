@@ -8,6 +8,7 @@ import AdoptionRequestSummary from './AdoptionRequestSummary';
 import AdoptionRequestCard from './AdoptionRequestCard';
 import { EditButton } from '@/components/Buttons/EditButton';
 import { AdoptedBadge } from '@/components/AdoptedBadge';
+import { Link } from 'react-router-dom';
 
 interface Props {
   pet: Pet;
@@ -38,7 +39,6 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
 
   const petRequests = requests.filter((r) => r.petId === updatedPet.id);
   const ownerCheck = isOwner(updatedPet, currentUser);
-  console.log('🐾 YourPetCard – adoptionStatus:', updatedPet?.adoptionStatus);
 
   return (
     <div
@@ -57,9 +57,12 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
       <div className="flex-1">
         <div className="flex justify-between items-start">
           <div>
-            <p className="font-semibold text-lg text-text-dark dark:text-text-base-dark">
+            <Link
+              to={`/pets/${updatedPet.id}`}
+              className="font-semibold text-lg text-text-dark dark:text-text-base-dark hover:underline"
+            >
               {updatedPet.name}
-            </p>
+            </Link>
 
             <p className="text-sm text-text-muted dark:text-text-subtle">
               {updatedPet.breed !== 'Unknown' ? updatedPet.breed : ''}

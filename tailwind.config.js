@@ -29,8 +29,17 @@ export default {
         'text-soft': '#f5f5f5',
         'text-placeholder': '#999999',
         'text-button-light': '#ffffff',
+
+          // Traffic-colors 
+        'traffic-green': '#065f46',         // Approved (lys modus)
+        'traffic-green-dark': '#34d399',    // Approved (dark mode)
+
+        'traffic-yellow': '#92400e',        // Pending (lys modus)
+        'traffic-yellow-dark': '#facc15',   // Pending (dark mode)
+
+        'traffic-red': '#b91c1c',           // Declined (lys modus)
+        'traffic-red-dark': '#f87171',      // Declined (dark mode)
           
-      
         // Form bakgrunner
         'form-bg': '#fef6f2',
         'form-bg-dark': '#1e1e1e',

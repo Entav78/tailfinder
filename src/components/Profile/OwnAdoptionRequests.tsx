@@ -35,7 +35,18 @@ const OwnAdoptionRequests = ({ ownRequests, allPets }: Props) => {
                 {pet && pet.breed !== 'Unknown' ? pet.breed : ''}
               </p>
               <p className="text-sm mt-1 text-text-muted dark:text-text-subtle">
-                Status: <strong>{r.status}</strong>
+                Status:{' '}
+                <strong
+                  className={`capitalize ${
+                    r.status === 'approved'
+                      ? 'text-traffic-green dark:text-traffic-green-dark'
+                      : r.status === 'pending'
+                      ? 'text-traffic-yellow dark:text-traffic-yellow-dark'
+                      : 'text-traffic-red dark:text-traffic-red-dark'
+                  }`}
+                >
+                  {r.status}
+                </strong>
               </p>
             </div>
           </div>
