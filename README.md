@@ -52,7 +52,7 @@ Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 
 ```bash
 # 1. Clone the repository
-$ git clone https://github.com/your-username/tailfinder.git
+$ git clone https://github.com/Entav78/tailfinder.git
 $ cd tailfinder
 
 # 2. Install dependencies
