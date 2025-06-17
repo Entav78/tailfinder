@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-body;
+}
+
 @layer components {
   .text-default {
     @apply text-text-base dark:text-text-base-dark;

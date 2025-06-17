@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: ['Nunito', 'sans-serif'],
+        heading: ['Nunito', 'sans-serif'],
+      },
       colors: {
         background: "#E8E0DC",
         header: "#53423C",
