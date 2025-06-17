@@ -22,7 +22,7 @@ Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 
 ---
 
-## ✨ Features
+## Features
 
 * User registration and login via Noroff API
 * Add, edit, and delete pets (authenticated users only)
@@ -36,7 +36,7 @@ Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 * [React](https://react.dev/)
 * [TypeScript](https://www.typescriptlang.org/)
@@ -48,7 +48,7 @@ Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup & Installation
 
 ```bash
 # 1. Clone the repository
@@ -67,7 +67,7 @@ $ npm run dev
 
 ---
 
-## 🗂️ Folder Structure
+## Folder Structure
 
 ```
 src/
@@ -83,9 +83,9 @@ src/
 
 ---
 
-## ⚠️ Known Limitations
+## Known Limitations
 
-### 🐾 Adoption Requests (Local Only)
+### Adoption Requests (Local Only)
 
 Due to the frontend-only nature of this exam, adoption requests are **not persisted to the backend** and do not sync between users or browsers.
 
@@ -102,7 +102,7 @@ Instead, they are stored using [Zustand](https://github.com/pmndrs/zustand) with
 
 ---
 
-## 👤 Author
+## Author
 
 **Hilde-Kathrine**
 Frontend Student @ Noroff
