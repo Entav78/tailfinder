@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast';
 import ManagePetPage from './pages/ManagePetPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
+import ErrorPage from './pages/ErrorPage';
 
 /**
  * Root component of the application.
@@ -53,6 +54,7 @@ function App() {
           />{' '}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
       <Toaster position="top-right" />
