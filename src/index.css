@@ -42,7 +42,7 @@ body {
 
 @layer components {
   .heading-xl {
-    @apply text-2xl font-bold mb-4 text-text-dark dark:text-secondary;
+    @apply text-2xl font-bold mb-4 text-text-dark dark:text-text-base-dark;
   }
 }
 
