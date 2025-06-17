@@ -9,6 +9,17 @@ import ManagePetPage from './pages/ManagePetPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
 
+/**
+ * Root component of the application.
+ *
+ * @remarks
+ * - Wraps all routes with a shared `Layout` component.
+ * - Uses `react-router-dom` for client-side routing.
+ * - Protects `/profile`, `/manage`, and `/manage/:id` routes using `ProtectedRoute`.
+ * - Integrates `react-hot-toast` for global toast notifications.
+ *
+ * @returns The app's route structure with shared layout and toast handler.
+ */
 function App() {
   return (
     <>

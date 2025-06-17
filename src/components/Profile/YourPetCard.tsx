@@ -1,3 +1,18 @@
+/**
+ * @component YourPetCard
+ * Displays a card for one of the logged-in user's pets, showing its details and any adoption requests received.
+ *
+ * Fetches the latest pet data if it's missing and conditionally renders an Edit button or Adopted badge
+ * based on ownership and adoption status. Each card also displays a summary and individual adoption requests.
+ *
+ * @param {Pet} pet - The pet to display.
+ * @param {AdoptionRequest[]} requests - All adoption requests in the system.
+ * @param {(petId: string, requesterName: string, status: 'approved' | 'declined') => void} handleUpdate
+ * Function called when the owner approves or declines a request.
+ *
+ * @returns {JSX.Element | null} A card displaying pet information and adoption requests, or nothing if the pet is missing.
+ */
+
 import { useEffect } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { usePetStore } from '@/store/petStore';

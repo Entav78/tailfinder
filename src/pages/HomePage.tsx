@@ -7,6 +7,24 @@ import { SearchAndFilter } from '@/components/SearchAndFilter/SearchAndFilter';
 import { filterPets } from '@/utils/filterPets';
 import { Pagination } from '@/components/Pagination';
 
+/**
+ * @component HomePage
+ * Displays the homepage with a list of pets.
+ *
+ * Functionality includes:
+ * - Fetching and displaying pets using `petStore`
+ * - Filtering by search term, species inclusion/exclusion, and adoption status
+ * - Paginating the filtered pets (8 per page)
+ * - Allowing users to toggle whether pet images are shown (via `RevealContext`)
+ * - Persisting excluded species and adoption visibility to localStorage
+ *
+ * Also renders:
+ * - SearchAndFilter component for user input
+ * - Toggle button for revealing/hiding images
+ * - PetCard components in a grid
+ * - Pagination controls for navigating pet pages
+ */
+
 const HomePage = () => {
   const context = useContext(RevealContext);
   if (!context) throw new Error('Missing RevealContext');
@@ -102,7 +120,7 @@ const HomePage = () => {
       />
 
       <div className="flex justify-end mb-4">
-        <Button onClick={() => setRevealImages(!revealImages)} variant="reveal" >
+        <Button onClick={() => setRevealImages(!revealImages)} variant="reveal">
           {revealImages ? 'Hide Images' : 'Reveal All Images'}
         </Button>
       </div>

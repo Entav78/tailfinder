@@ -1,6 +1,14 @@
+/**
+ * Entry point of the React application.
+ *
+ * @remarks
+ * - Applies saved theme preference before rendering.
+ * - Wraps the app in `BrowserRouter` for routing and `RevealProvider` for context.
+ * - Mounts the root `App` component inside `#root` element.
+ */
 import { loadThemePreference } from './utils/theme';
 import RevealProvider from '@/context/RevealProvider';
-loadThemePreference(); // 🔥 call before React renders anything
+loadThemePreference();
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

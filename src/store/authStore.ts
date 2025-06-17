@@ -9,6 +9,20 @@ interface AuthState {
   isLoggedIn: () => boolean;
 }
 
+/**
+ * Zustand store for managing authentication state.
+ *
+ * Persists user and access token using localStorage.
+ *
+ * Features:
+ * - `login`: Stores user info and access token
+ * - `logout`: Clears user and token data
+ * - `isLoggedIn`: Checks if a user is currently authenticated
+ *
+ * State shape:
+ * - `user`: { name, email } or null
+ * - `accessToken`: string or null
+ */
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
@@ -23,7 +37,7 @@ export const useAuthStore = create<AuthState>()(
       isLoggedIn: () => !!get().accessToken,
     }),
     {
-      name: 'auth-storage', // navnet på keyen i localStorage
+      name: 'auth-storage',
     }
   )
 );

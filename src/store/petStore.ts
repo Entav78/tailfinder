@@ -13,6 +13,19 @@ interface PetStore {
   ) => void;
 }
 
+/**
+ * Zustand store for managing pet data.
+ *
+ * Persists the list of pets using localStorage.
+ *
+ * Features:
+ * - `fetchPets`: Fetches pets from the API and stores them in state
+ * - `setPets`: Manually sets the list of pets
+ * - `updateAdoptionStatus`: Updates the adoption status of a specific pet
+ *
+ * State shape:
+ * - `pets`: Array of pet objects
+ */
 export const usePetStore = create<PetStore>()(
   persist(
     (set) => ({
@@ -38,7 +51,7 @@ export const usePetStore = create<PetStore>()(
         })),
     }),
     {
-      name: 'pet-storage', // lokalStorage-key
+      name: 'pet-storage',
     }
   )
 );

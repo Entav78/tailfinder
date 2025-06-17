@@ -7,6 +7,19 @@ import { usePetStore } from '@/store/petStore';
 import { AdoptButton } from '@/components/Buttons/AdoptButton';
 import { findRequesterName } from '@/utils/findRequesterName';
 
+/**
+ * @component PetDetailPage
+ * Displays detailed information about a specific pet, including appearance, description,
+ * owner status, and adoption status.
+ *
+ * - Fetches pet details from the store if not already loaded
+ * - Renders pet attributes (name, image, breed, etc.)
+ * - Shows 'Edit' button if the user is the owner and pet is not adopted
+ * - Shows 'Adopt' button if pet is available and user is not the owner
+ * - Displays adopter name if pet has been adopted
+ *
+ * @returns {JSX.Element} A full pet detail view with conditional actions based on user and adoption status
+ */
 const PetDetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
@@ -20,7 +33,7 @@ const PetDetailPage = () => {
 
   useEffect(() => {
     if (!updatedPet) {
-      fetchPets(); // henter dyrene hvis det ikke er noen lagret
+      fetchPets();
     }
   }, [updatedPet, fetchPets]);
 

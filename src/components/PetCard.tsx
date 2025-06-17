@@ -10,10 +10,24 @@ import { usePetStore } from '@/store/petStore';
 import { toast } from 'react-hot-toast';
 import { AdoptedBadge } from './AdoptedBadge';
 
+/**
+ * Props for the PetCard component.
+ * @property {Pet} pet - The pet object to display.
+ */
 interface PetCardProps {
   pet: Pet;
 }
 
+/**
+ * A card component that displays pet details including name, image, description, and status.
+ * Includes logic for conditionally rendering Adopt and Edit buttons, and a share link button.
+ *
+ * @component
+ * @param {PetCardProps} props - Props including a single pet.
+ * @returns {JSX.Element} A styled card with pet information and actions.
+ *
+ * @throws Will throw an error if used outside of a RevealProvider context.
+ */
 export const PetCard = ({ pet }: PetCardProps) => {
   const context = useContext(RevealContext);
 
@@ -49,6 +63,13 @@ export const PetCard = ({ pet }: PetCardProps) => {
   const ownerCheck = isOwner(updatedPet, currentUser);
   const isAdopted = adoptionStatus === 'Adopted';
 
+  /**
+   * Handles the share link functionality by copying the pet's URL to the clipboard.
+   * Displays a toast message upon success or failure.
+   *
+   * @param {string} petId - The unique ID of the pet to share.
+   * @returns {Promise<void>}
+   */
   const handleShare = async (petId: string) => {
     try {
       const url = `${window.location.origin}/pets/${petId}`;
@@ -67,8 +88,6 @@ export const PetCard = ({ pet }: PetCardProps) => {
       }`}
     >
       <div className="grow">
-        {/* <div className="absolute left-[-2rem] top-[-1rem] w-6 h-6 bg-[url('/img/paw-light.svg')] bg-no-repeat bg-contain opacity-30" />
-         */}
         <Link to={`/pets/${id}`} className="block group">
           {revealImages && image?.url ? (
             <img

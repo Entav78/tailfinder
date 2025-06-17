@@ -1,3 +1,14 @@
+/**
+ * @component OwnAdoptionRequests
+ * Displays a list of the current user's adoption requests along with pet information.
+ * If the user has not made any adoption requests, a placeholder message is shown.
+ *
+ * @param {AdoptionRequest[]} ownRequests - List of adoption requests made by the logged-in user.
+ * @param {Pet[]} allPets - Full list of pets used to match pet information to each request.
+ *
+ * @returns {JSX.Element} A list of cards showing pet details and request status, or a fallback message if no requests exist.
+ */
+
 import type { Pet } from '@/types/pet';
 import type { AdoptionRequest } from '@/store/adoptionRequestStore';
 

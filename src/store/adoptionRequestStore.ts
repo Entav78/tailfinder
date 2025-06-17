@@ -34,6 +34,24 @@ export interface AdoptionRequestStore {
   getAlertCountForUser: (userName: string) => number;
 }
 
+/**
+ * Zustand store for managing adoption requests between users.
+ *
+ * Persists data using localStorage and supports devtools for debugging.
+ *
+ * Features:
+ * - `sendRequest`: Submit a new adoption request
+ * - `setRequests`: Overwrite the request array (e.g., from external source)
+ * - `getRequestsForPet`: Retrieve all requests for a specific pet
+ * - `getRequestsForOwner`: Filter requests for all pets owned by a specific user
+ * - `updateRequestStatus`: Update the status of a request and mark it as seen by the owner
+ * - `markRequestsAsSeen`: Mark requests as seen by owner or requester (used for alert counts)
+ * - `getAlertCountForUser`: Returns how many unseen updates a user has (as owner/requester)
+ *
+ * Each request includes:
+ * - `petId`, `requesterName`, `ownerName`, `message?`, `status`, `date`
+ * - `seenByRequester`, `seenByOwner` for tracking notifications
+ */
 export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
   devtools(
     persist(
@@ -127,7 +145,7 @@ export const useAdoptionRequestStore = create<AdoptionRequestStore>()(
         },
       }),
       {
-        name: 'adoption-requests-storage', // navnet i localStorage
+        name: 'adoption-requests-storage',
       }
     )
   )

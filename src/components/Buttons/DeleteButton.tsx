@@ -3,10 +3,23 @@ import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/Buttons/Button';
 
 interface DeleteButtonProps {
+  /**
+   * ID of the pet to be deleted.
+   */
   petId: string;
-  onDeleted?: () => void; // Valgfri callback etter sletting
+  /**
+   * Optional callback function called after successful deletion.
+   */
+  onDeleted?: () => void;
 }
 
+/**
+ * A button component that deletes a pet when clicked.
+ *
+ * @component
+ * @param {DeleteButtonProps} props - Props including petId and an optional onDeleted callback.
+ * @returns {JSX.Element} A styled "Delete" button.
+ */
 export const DeleteButton = ({ petId, onDeleted }: DeleteButtonProps) => {
   const accessToken = useAuthStore((state) => state.accessToken);
 
@@ -22,7 +35,7 @@ export const DeleteButton = ({ petId, onDeleted }: DeleteButtonProps) => {
       await deletePet(petId, accessToken);
 
       alert('Pet deleted!');
-      if (onDeleted) onDeleted(); // f.eks. naviger bort eller fjern fra liste
+      if (onDeleted) onDeleted();
     } catch (error) {
       console.error(error);
       alert('Failed to delete pet');

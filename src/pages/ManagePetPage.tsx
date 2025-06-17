@@ -8,8 +8,20 @@ import { DeleteButton } from '@/components/Buttons/DeleteButton';
 import { Button } from '@/components/Buttons/Button';
 import { NOROFF_API_KEY } from '@/constants/api';
 
+/**
+ * @component ManagePetPage
+ * Provides a form interface for adding a new pet or editing an existing pet.
+ *
+ * - If an `id` param is present, fetches pet data for editing
+ * - Allows form input for pet details such as name, age, species, and appearance
+ * - Handles submission via POST (create) or PUT (update)
+ * - On successful submission, displays toast feedback and redirects
+ * - If editing, provides an option to delete the pet
+ *
+ * @returns {JSX.Element} The form section for creating or editing a pet profile
+ */
 const ManagePetPage = () => {
-  const { id } = useParams(); // Bruk kun denne, ikke destrukturer på nytt senere
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<Pet>({
@@ -32,7 +44,6 @@ const ManagePetPage = () => {
 
   const [loading, setLoading] = useState(false);
 
-  // Fetch pet data if editing
   useEffect(() => {
     if (!id) return;
     setLoading(true);
@@ -68,7 +79,6 @@ const ManagePetPage = () => {
     const method = id ? 'PUT' : 'POST';
     const token = useAuthStore.getState().accessToken;
 
-    // Fjern id ved POST
     const payload = id
       ? formData
       : // eslint-disable-next-line @typescript-eslint/no-unused-vars

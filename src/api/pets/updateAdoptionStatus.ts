@@ -1,5 +1,15 @@
 import { API_PETS, NOROFF_API_KEY } from '@/constants/api';
 
+/**
+ * Updates the adoption status of a specific pet.
+ *
+ * @param petId - The ID of the pet to update.
+ * @param status - The new adoption status (e.g., 'available', 'pending', 'adopted').
+ * @param token - The access token for authentication.
+ * @returns A Promise that resolves to the updated pet data from the API.
+ * @throws Error if the request fails.
+ */
+
 export async function updateAdoptionStatus(
   petId: string,
   status: string,

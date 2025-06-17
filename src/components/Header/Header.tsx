@@ -6,6 +6,16 @@ import { LogoutButton } from '@/components/Buttons/LogoutButton';
 import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 
+/**
+ * Header component for navigation and user status.
+ * Includes logo, links, theme toggle, login/logout handling,
+ * and alert count for adoption requests.
+ *
+ * - Shows different views for mobile and desktop.
+ * - Displays alert badge if user has pending adoption requests.
+ *
+ * @returns {JSX.Element} The site header
+ */
 const Header = () => {
   const { accessToken } = useAuthStore();
   const user = useAuthStore((state) => state.user);

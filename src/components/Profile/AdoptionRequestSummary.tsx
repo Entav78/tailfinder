@@ -1,3 +1,9 @@
+/**
+ * @component AdoptionRequestSummary
+ * Displays a summary of how many adoption requests a pet has received.
+ * If there are no requests, it renders nothing.
+ */
+
 import type { Pet } from '@/types/pet';
 import type { AdoptionRequest } from '@/store/adoptionRequestStore';
 

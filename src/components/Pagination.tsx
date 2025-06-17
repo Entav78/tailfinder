@@ -1,3 +1,21 @@
+/**
+ * @component Pagination
+ * Renders pagination buttons for navigating through multiple pages.
+ *
+ * Behavior:
+ * - If there is only one page or less, nothing is rendered.
+ * - Displays a button for each page.
+ * - Highlights the currently active page.
+ * - Calls `onPageChange` with the new page number when a button is clicked.
+ *
+ * @param {Object} props - Component props
+ * @param {number} props.totalPages - Total number of pages available
+ * @param {number} props.currentPage - The currently active page
+ * @param {(page: number) => void} props.onPageChange - Callback triggered when a page button is clicked
+ *
+ * @returns {JSX.Element | null} Pagination buttons or `null` if only one page
+ */
+
 interface PaginationProps {
   totalPages: number;
   currentPage: number;

@@ -2,13 +2,37 @@ import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
 import { getPetsUrl } from '@/constants/api';
-//import { updateAdoptionStatus as updateAdoptionStatusApi } from '@/api/pets/updateAdoptionStatus';
 import { usePetStore } from '@/store/petStore';
 import type { Pet } from '@/types/pet';
 import type { AdoptionRequest } from '@/store/adoptionRequestStore';
 import toast from 'react-hot-toast';
 import { updateAdoptionStatus } from '@/api/pets/updateAdoptionStatus';
 
+/**
+ * Custom hook for handling user-related profile data and adoption requests.
+ *
+ * Responsibilities:
+ * - Fetches all pets and filters out those owned by the current user.
+ * - Retrieves adoption requests both made by the user and for the user's pets.
+ * - Provides a handler to update the status of an adoption request (approve/decline),
+ *   and updates the pet's status via API if approved.
+ * - Tracks which adoption requests have been seen by the user or the requester.
+ *
+ * @returns {{
+ *   user: User | null,
+ *   accessToken: string | null,
+ *   loading: boolean,
+ *   userPets: Pet[],
+ *   requests: AdoptionRequest[],
+ *   ownRequests: AdoptionRequest[],
+ *   allPets: Pet[],
+ *   handleUpdate: (
+ *     petId: string,
+ *     requesterName: string,
+ *     status: 'approved' | 'declined'
+ *   ) => Promise<void>
+ * }}
+ */
 export function useProfileData() {
   const user = useAuthStore((state) => state.user);
   const accessToken = useAuthStore((state) => state.accessToken);
@@ -27,7 +51,6 @@ export function useProfileData() {
   const [allPets, setAllPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all owned pets + filter own pets
   useEffect(() => {
     const fetchUserPets = async () => {
       try {
@@ -50,7 +73,6 @@ export function useProfileData() {
     if (user?.name) fetchUserPets();
   }, [user?.name]);
 
-  // Requests received as owner
   useEffect(() => {
     if (user?.name && userPets.length > 0) {
       const fetchedRequests = adoptionRequests.filter((req) =>
@@ -62,7 +84,6 @@ export function useProfileData() {
     }
   }, [user?.name, userPets, adoptionRequests]);
 
-  // Requests as owner
   useEffect(() => {
     if (user?.name) {
       const fetchedOwnRequests = adoptionRequests.filter(
@@ -72,7 +93,6 @@ export function useProfileData() {
     }
   }, [user?.name, adoptionRequests]);
 
-  // Update status
   const handleUpdate = async (
     petId: string,
     requesterName: string,
@@ -82,11 +102,11 @@ export function useProfileData() {
       if (!accessToken) throw new Error('No token found');
 
       if (status === 'approved') {
-        await updateAdoptionStatus(petId, 'Adopted', accessToken); // API
-        await usePetStore.getState().fetchPets(); // Sync pets
+        await updateAdoptionStatus(petId, 'Adopted', accessToken);
+        await usePetStore.getState().fetchPets();
       }
 
-      updateStatus(petId, requesterName, status); // Update local request
+      updateStatus(petId, requesterName, status);
 
       if (user?.name) {
         markRequestsAsSeen('owner', user.name);

@@ -1,8 +1,19 @@
 import { useProfileData } from '@/hooks/useProfileData';
 import OwnAdoptionRequests from '@/components/Profile/OwnAdoptionRequests';
 import YourPetCard from '@/components/Profile/YourPetCard';
-//import toast from 'react-hot-toast';
 
+/**
+ * @component ProfilePage
+ * Displays the logged-in user's profile information, including:
+ * - Basic details (name, email)
+ * - List of pets added by the user
+ * - Incoming adoption requests for the user's pets
+ * - Adoption requests made by the user
+ *
+ * Uses `useProfileData` hook to load user data and requests.
+ *
+ * @returns {JSX.Element} The profile page with pet management and request sections
+ */
 const ProfilePage = () => {
   const {
     user,

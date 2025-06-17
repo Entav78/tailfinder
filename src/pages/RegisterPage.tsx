@@ -4,6 +4,18 @@ import { getRegisterUrl } from '@/constants/api';
 import toast from 'react-hot-toast';
 import { Button } from '@/components/Buttons/Button';
 
+/**
+ * @component RegisterPage
+ * Renders the registration form for new users.
+ *
+ * Features:
+ * - Input fields for name, email, and password
+ * - Validates and submits the form via Noroff's `/auth/register` endpoint
+ * - Displays success toast and redirects to login on success
+ * - Shows error messages if registration fails
+ *
+ * @returns {JSX.Element} The registration page component
+ */
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

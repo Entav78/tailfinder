@@ -7,6 +7,15 @@ interface AdoptButtonProps {
   pet: Pet;
 }
 
+/**
+ * Renders an "Adopt" button for pets that are not yet adopted.
+ * If the user is logged in and clicks the button, an adoption request is sent.
+ *
+ * @component
+ * @param {AdoptButtonProps} props - The pet object to check adoption status and owner.
+ * @returns {JSX.Element | null} A button to send adoption request, or null if already adopted.
+ */
+
 export const AdoptButton = ({ pet }: AdoptButtonProps) => {
   const user = useAuthStore((state) => state.user);
   const sendRequest = useAdoptionRequestStore((state) => state.sendRequest);

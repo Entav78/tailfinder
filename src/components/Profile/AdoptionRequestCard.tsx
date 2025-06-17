@@ -1,3 +1,14 @@
+/**
+ * Renders a card for a single adoption request.
+ * Shows requester name and allows the owner to approve or decline the request
+ * if it's still pending. Otherwise, displays the status.
+ *
+ * @component
+ * @param {AdoptionRequest} request - The request data containing requester name and status
+ * @param {(status: 'approved' | 'declined') => void} onUpdate - Callback to update the request status
+ * @returns {JSX.Element} The rendered adoption request card
+ */
+
 import type { AdoptionRequest } from '@/store/adoptionRequestStore';
 import { Button } from '@/components/Buttons/Button';
 

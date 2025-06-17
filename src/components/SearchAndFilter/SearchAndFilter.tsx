@@ -1,3 +1,33 @@
+/**
+ * @component SearchAndFilter
+ * A UI component for searching and filtering pets based on free text, adoption status, and species.
+ *
+ * Includes:
+ * - A search input that filters by any visible text on the pet card (e.g., name, owner, species, breed)
+ * - A checkbox to toggle showing adopted pets
+ * - A dropdown to choose between including or excluding specific species
+ * - Dynamic checkboxes to include or exclude species based on the selected mode
+ *
+ * Note:
+ * - The search input is not limited to the pet name — it matches any text content rendered in each card.
+ * - If a user excludes a species (e.g., "snake"), the pets of that species will not show, even if "Show all species" is selected later — the exclusion remains unless manually unchecked.
+ *
+ * @param {Object} props - Component props
+ * @param {'all' | 'include' | 'exclude'} props.viewMode - Current filtering mode for species
+ * @param {(value: 'all' | 'include' | 'exclude')} props.onViewModeChange - Callback to update the view mode
+ * @param {string} props.searchTerm - The current free-text search term
+ * @param {(value: string)} props.onSearchChange - Callback to update the search term
+ * @param {string[]} props.includedSpecies - Species explicitly included when view mode is 'include'
+ * @param {(value: string[])} props.onIncludedSpeciesChange - Callback to update included species
+ * @param {string[]} props.excludedSpecies - Species to exclude when view mode is 'exclude'
+ * @param {(value: string[])} props.onExcludedSpeciesChange - Callback to update excluded species
+ * @param {string[]} props.availableSpecies - All available species for filtering
+ * @param {boolean} props.showAdopted - Whether to show adopted pets
+ * @param {(value: boolean)} props.onShowAdoptedChange - Callback to toggle adopted pets visibility
+ *
+ * @returns {JSX.Element} A component with search and filtering controls
+ */
+
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface SearchAndFilterProps {

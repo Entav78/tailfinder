@@ -7,6 +7,18 @@ import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/Buttons/Button';
 
+/**
+ * @component LoginPage
+ * Renders the login form for users to authenticate into the application.
+ *
+ * - Accepts user input for email and password
+ * - Submits a POST request to the login API endpoint
+ * - Displays validation and error messages
+ * - On successful login, updates the auth store and redirects to the homepage
+ *
+ * @returns {JSX.Element} A form interface for user login
+ */
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
