@@ -4,7 +4,7 @@ Welcome to **TailFinder**, a user-friendly frontend application that lets users 
 
 ---
 
-##Table of Contents  📄 
+## Table of Contents  📄 
 
 * [Demo](#demo)
 * [Features](#features)
@@ -16,7 +16,7 @@ Welcome to **TailFinder**, a user-friendly frontend application that lets users 
 
 ---
 
-## 🎥 Demo
+## Demo
 
 Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 
