@@ -71,14 +71,22 @@ $ npm run dev
 
 ```
 src/
-├── components/
-├── context/
-├── hooks/
-├── pages/
-├── store/
-├── types/
-├── utils/
-└── App.tsx
+├── api/           # API helpers and fetch logic
+│   └── pets/      # Endpoints for pet-related actions (e.g. updateAdoptionStatus)
+├── assets/        # Static assets like images or icons
+├── components/    # Reusable UI components (e.g. buttons, layout, cards)
+├── context/       # Context providers (e.g. RevealProvider for image toggling)
+├── constants/     # Shared constants like API URLs and keys
+├── hooks/         # Custom React hooks (e.g. useProfileData)
+├── pages/         # Page components (e.g. HomePage, ProfilePage, etc.)
+├── store/         # Zustand stores for auth, pets, adoption requests
+├── types/         # TypeScript types (e.g. Pet, LoginResponse)
+├── utils/         # Utility functions (e.g. theme toggling, filtering)
+├── App.tsx        # Main app component with routes
+├── main.tsx       # Entry point – React root and providers
+├── index.css      # Global Tailwind and base styles
+└── vite-env.d.ts  # Vite-specific TypeScript definitions
+
 ```
 
 ---
