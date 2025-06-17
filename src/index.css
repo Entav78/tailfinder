@@ -53,6 +53,10 @@
 
 }
 
+.heading-md {
+  @apply text-lg font-semibold text-text-dark dark:text-text-base-dark;
+}
+
 @layer components {
   .form-container {
     @apply bg-form-bg dark:bg-form-bg-dark 

@@ -112,117 +112,196 @@ const ManagePetPage = () => {
       <h1 className="text-2xl font-bold mb-4">
         {id ? 'Edit Pet' : 'Add New Pet'}
       </h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="breed"
-          placeholder="Breed"
-          value={formData.breed}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="species"
-          placeholder="Species (e.g., dog, cat)"
-          value={formData.species}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="gender"
-          placeholder="Gender (e.g., male, female)"
-          value={formData.gender}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
 
-        <input
-          name="age"
-          type="number"
-          placeholder="Age"
-          value={formData.age === 0 ? '' : formData.age}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="size"
-          placeholder="Size"
-          value={formData.size}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="color"
-          placeholder="Color"
-          value={formData.color}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="location"
-          placeholder="Location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="image.url"
-          placeholder="Image URL"
-          value={formData.image?.url || ''}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              image: {
-                url: e.target.value,
-                alt: prev.image?.alt || '',
-              },
-            }))
-          }
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="image.alt"
-          placeholder="Image Alt Text"
-          value={formData.image?.alt || ''}
-          onChange={(e) =>
-            setFormData((prev) => ({
-              ...prev,
-              image: {
-                url: prev.image?.url || '',
-                alt: e.target.value,
-              },
-            }))
-          }
-          className="w-full p-2 border rounded"
-        />
-        <input
-          name="adoptionStatus"
-          placeholder="Adoption Status"
-          value={formData.adoptionStatus}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-        />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <h2 className="heading-md mt-4 mb-2">Basic Info</h2>
+        <div>
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="breed" className="form-label">
+            Breed
+          </label>
+          <input
+            id="breed"
+            name="breed"
+            placeholder="Breed"
+            value={formData.breed}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="species" className="form-label">
+            Species
+          </label>
+          <input
+            id="species"
+            name="species"
+            placeholder="Species (e.g., dog, cat)"
+            value={formData.species}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="gender" className="form-label">
+            Gender
+          </label>
+          <input
+            id="gender"
+            name="gender"
+            placeholder="Gender (e.g., male, female)"
+            value={formData.gender}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="age" className="form-label">
+            Age
+          </label>
+          <input
+            id="age"
+            name="age"
+            type="number"
+            placeholder="Age"
+            value={formData.age === 0 ? '' : formData.age}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div className="mt-8">
+          <h2 className="heading-md mt-6">Appearance</h2>
+        </div>
+        <div>
+          <label htmlFor="size" className="form-label">
+            Size
+          </label>
+          <input
+            id="size"
+            name="size"
+            placeholder="Size"
+            value={formData.size}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="color" className="form-label">
+            Color
+          </label>
+          <input
+            id="color"
+            name="color"
+            placeholder="Color"
+            value={formData.color}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Description"
+            value={formData.description}
+            onChange={handleChange}
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="location" className="form-label">
+            Location
+          </label>
+          <input
+            id="location"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+        </div>
+        <div className="mt-8">
+          <h2 className="heading-md mt-6">Adoption & Image</h2>
+        </div>
+        <div>
+          <label htmlFor="image-url" className="form-label">
+            Image URL
+          </label>
+          <input
+            id="image-url"
+            name="image-url"
+            placeholder="Must start with https://"
+            value={formData.image?.url || ''}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                image: {
+                  url: e.target.value,
+                  alt: prev.image?.alt || '',
+                },
+              }))
+            }
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="image-alt" className="form-label">
+            Image Alt Text
+          </label>
+          <input
+            id="image-alt"
+            name="image-alt"
+            placeholder="Image Alt Text"
+            value={formData.image?.alt || ''}
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                image: {
+                  url: prev.image?.url || '',
+                  alt: e.target.value,
+                },
+              }))
+            }
+            className="input-field"
+          />
+        </div>
+        <div>
+          <label htmlFor="adoptionStatus" className="form-label">
+            Adoption Status
+          </label>
+          <input
+            id="adoptionStatus"
+            name="adoptionStatus"
+            placeholder="Adoption Status"
+            value={formData.adoptionStatus}
+            onChange={handleChange}
+            className="input-field"
+          />
+        </div>
         <div className="flex gap-4 justify-end">
           <Button
             type="submit"
