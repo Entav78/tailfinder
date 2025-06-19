@@ -38,7 +38,7 @@ export const Pagination = ({
           className={`px-4 py-2 rounded ${
             currentPage === index + 1
               ? 'bg-header text-text-button-light font-bold'
-              : 'bg-secondary text-text-dark hover:bg-secondary-hover'
+              : 'bg-secondary text-text-base hover:bg-secondary-hover'
           }`}
         >
           {index + 1}

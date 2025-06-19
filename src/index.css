@@ -36,13 +36,13 @@ body {
   }
 
   .text-danger {
-    @apply text-text-danger;
+    @apply text-text-danger; 
   }
 }
 
 @layer components {
   .heading-xl {
-    @apply text-2xl font-bold mb-4 text-text-dark dark:text-text-base-dark;
+    @apply text-2xl font-bold mb-4 text-text-base dark:text-text-base-dark;
   }
 }
 
@@ -52,13 +52,13 @@ body {
   }
 
   .form-heading {
-    @apply text-2xl font-bold mb-4 text-text-dark dark:text-text-base-dark;
+    @apply text-2xl font-bold mb-4 text-text-base dark:text-text-base-dark;
   }
 
 }
 
 .heading-md {
-  @apply text-lg font-semibold text-text-dark dark:text-text-base-dark;
+  @apply text-lg font-semibold text-text-base dark:text-text-base-dark;
 }
 
 @layer components {
@@ -72,7 +72,7 @@ body {
 @layer components {
   .input-field {
     @apply w-full px-4 py-2 rounded-md 
-      bg-input-light text-text-dark
+      bg-input-light text-text-base
       border border-border-light 
       placeholder-text-placeholder
       dark:bg-input-dark dark:text-text-base-dark
@@ -86,7 +86,7 @@ body {
 
   .input-field:-webkit-autofill {
     box-shadow: 0 0 0 1000px #ffffff inset !important; /* input-light */
-    -webkit-text-fill-color: #1a1a1a !important;        /* text-dark */
+    -webkit-text-fill-color: #1a1a1a !important;        /* text-base */
     transition: background-color 9999s ease-in-out 0s;
   }
   

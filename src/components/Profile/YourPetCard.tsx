@@ -74,7 +74,7 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
           <div>
             <Link
               to={`/pets/${updatedPet.id}`}
-              className="font-semibold text-lg text-text-dark dark:text-text-base-dark hover:underline"
+              className="font-semibold text-lg text-text-base dark:text-text-base-dark hover:underline"
             >
               {updatedPet.name}
             </Link>

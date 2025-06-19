@@ -39,7 +39,7 @@ const OwnAdoptionRequests = ({ ownRequests, allPets }: Props) => {
               />
             )}
             <div>
-              <p className="font-semibold text-lg text-text-dark dark:text-text-base-dark">
+              <p className="font-semibold text-lg text-text-base dark:text-text-base-dark">
                 {pet?.name}
               </p>
               <p className="text-sm text-text-muted dark:text-text-subtle">

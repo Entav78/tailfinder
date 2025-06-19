@@ -30,7 +30,7 @@ const ProfilePage = () => {
       <h1 className="text-2xl font-bold mb-4">Your Profile</h1>
 
       {user && (
-        <div className="mb-6 text-sm text-text-dark dark:text-text-base-dark">
+        <div className="mb-6 text-sm text-text-base dark:text-text-base-dark">
           <p>
             <strong>Name:</strong> {user.name}
           </p>

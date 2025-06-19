@@ -104,7 +104,7 @@ export const PetCard = ({ pet }: PetCardProps) => {
           )}
 
           <div className="flex items-center justify-between mb-1">
-            <h2 className="text-xl font-semibold text-text-dark dark:text-text-base-dark group-hover:underline">
+            <h2 className="text-xl font-semibold text-text-base dark:text-text-base-dark group-hover:underline">
               {name}
             </h2>
             <button
