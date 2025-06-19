@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState, useMemo } from 'react';
 import { PetCard } from '@/components/PetCard';
 import { RevealContext } from '@/context/RevealContext';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 import { usePetStore } from '@/store/petStore';
 import { SearchAndFilter } from '@/components/SearchAndFilter/SearchAndFilter';
 import { filterPets } from '@/utils/filterPets';

@@ -1,6 +1,6 @@
 import { deletePet } from '@/api/pets/deletePet';
 import { useAuthStore } from '@/store/authStore';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 
 interface DeleteButtonProps {
   /**

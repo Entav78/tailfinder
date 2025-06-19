@@ -13,7 +13,7 @@
  *
  * @returns A section element with a 404 message and a navigation button.
  */
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
 function ErrorPage() {

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
 interface EditButtonProps {

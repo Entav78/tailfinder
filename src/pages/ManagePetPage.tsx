@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { getPetByIdUrl, getPetsUrl } from '@/constants/api';
 import type { Pet } from '@/types/pet';
 import { DeleteButton } from '@/components/Buttons/DeleteButton';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 import { NOROFF_API_KEY } from '@/constants/api';
 
 /**

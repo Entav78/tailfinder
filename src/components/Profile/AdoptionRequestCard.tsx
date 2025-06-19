@@ -10,7 +10,7 @@
  */
 
 import type { AdoptionRequest } from '@/store/adoptionRequestStore';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 
 interface Props {
   request: AdoptionRequest;

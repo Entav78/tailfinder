@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/store/authStore';
 import { useAdoptionRequestStore } from '@/store/adoptionRequestStore';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 import type { Pet } from '@/types/pet';
 
 interface AdoptButtonProps {

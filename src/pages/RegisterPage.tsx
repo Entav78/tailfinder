@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getRegisterUrl } from '@/constants/api';
 import toast from 'react-hot-toast';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 
 /**
  * @component RegisterPage

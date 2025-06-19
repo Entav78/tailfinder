@@ -5,7 +5,7 @@ import type { LoginResponse } from '@/types/loginResponse';
 import type { ErrorResponse } from '@/types/errorResponse';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
-import { Button } from '@/components/Buttons/Button';
+import { Button } from '@/components/Buttons/Button/Button';
 
 /**
  * @component LoginPage
