@@ -42,14 +42,12 @@ const YourPetCard = ({ pet, requests, handleUpdate }: Props) => {
   );
   const currentUser = useAuthStore((state) => state.user?.name);
 
-  // Hent oppdatert liste om vi mangler dyret
   useEffect(() => {
     if (!updatedPet) {
       fetchPets();
     }
   }, [updatedPet, fetchPets]);
 
-  // Ikke prøv å rendere hvis vi fortsatt ikke har oppdatert dyret
   if (!updatedPet) return null;
 
   const petRequests = requests.filter((r) => r.petId === updatedPet.id);

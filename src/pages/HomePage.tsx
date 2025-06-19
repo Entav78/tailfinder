@@ -91,8 +91,12 @@ const HomePage = () => {
   ]);
 
   useEffect(() => {
-    setCurrentPage(1); // Reset til første side ved søk eller filtrering
+    setCurrentPage(1);
   }, [searchTerm, viewMode, includedSpecies, excludedSpecies, showAdopted]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   const totalPages = Math.ceil(filteredPets.length / itemsPerPage);
 
