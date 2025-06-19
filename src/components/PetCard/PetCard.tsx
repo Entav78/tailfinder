@@ -44,7 +44,6 @@ export const PetCard = ({ pet }: PetCardProps) => {
     state.pets.find((p) => p.id === pet.id)
   );
 
-  // Fallback hvis pet ikke er funnet i store
   if (!updatedPet) return null;
 
   const {
@@ -81,6 +80,8 @@ export const PetCard = ({ pet }: PetCardProps) => {
     }
   };
 
+  const defaultImage = '/img/default-pet.jpg';
+
   return (
     <article
       className={`relative bg-card dark:bg-darkCard shadow rounded p-4 flex flex-col justify-between min-h-[380px] transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl ${
@@ -91,8 +92,12 @@ export const PetCard = ({ pet }: PetCardProps) => {
         <Link to={`/pets/${id}`} className="block group">
           {revealImages && image?.url ? (
             <img
-              src={image.url}
-              alt={image.alt || `${name} the ${breed || 'pet'}`}
+              src={image?.url || defaultImage}
+              alt={image?.alt || `${name} the ${breed || 'pet'}`}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = defaultImage;
+              }}
               className="w-full h-48 object-cover rounded mb-4"
             />
           ) : (
