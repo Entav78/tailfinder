@@ -4,7 +4,7 @@ import { EditButton } from '@/components/Buttons/EditButton';
 import { isOwner } from '@/types/pet';
 import { useAuthStore } from '@/store/authStore';
 import { usePetStore } from '@/store/petStore';
-import { AdoptButton } from '@/components/Buttons/AdoptButton';
+import { AdoptButton } from '@/components/Buttons/AdoptButton/AdoptButton';
 import { findRequesterName } from '@/utils/findRequesterName';
 
 /**

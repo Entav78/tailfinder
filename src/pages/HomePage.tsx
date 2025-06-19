@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useMemo } from 'react';
-import { PetCard } from '@/components/PetCard';
+import { PetCard } from '@/components/PetCard/PetCard';
 import { RevealContext } from '@/context/RevealContext';
 import { Button } from '@/components/Buttons/Button/Button';
 import { usePetStore } from '@/store/petStore';

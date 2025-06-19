@@ -4,11 +4,11 @@ import type { Pet } from '@/types/pet';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 import { isOwner } from '@/types/pet';
-import { AdoptButton } from '@/components/Buttons/AdoptButton';
+import { AdoptButton } from '@/components/Buttons/AdoptButton/AdoptButton';
 import { EditButton } from '@/components/Buttons/EditButton';
 import { usePetStore } from '@/store/petStore';
 import { toast } from 'react-hot-toast';
-import { AdoptedBadge } from './AdoptedBadge';
+import { AdoptedBadge } from '../AdoptedBadge';
 
 /**
  * Props for the PetCard component.
