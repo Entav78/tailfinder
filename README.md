@@ -112,6 +112,13 @@ Instead, they are stored using [Zustand](https://github.com/pmndrs/zustand) with
 
 ---
 
+## Accessibility Consideration
+
+Images are intentionally **hidden by default** on the homepage to respect users who may have phobias (e.g. snakes or rats).  
+Users can choose to reveal all images by clicking the “Reveal All Images” button. This improves accessibility and emotional safety while browsing.
+
+---
+
 ## Author
 
 **Hilde-Kathrine**
