@@ -33,6 +33,7 @@ Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 * Dark mode toggle
 * Responsive design for mobile and desktop
 * Humor-friendly code and hidden Spider-Man references ☺️
+* Basic component testing with Vitest & Testing Library
 
 ---
 
@@ -45,6 +46,7 @@ Live site: [https://tailfinder.netlify.app](https://tailfinder.netlify.app)
 * [Zustand](https://github.com/pmndrs/zustand)
 * [React Router](https://reactrouter.com/)
 * [React Hot Toast](https://react-hot-toast.com/)
+* [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/)
 
 ---
 
