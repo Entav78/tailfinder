@@ -56,7 +56,7 @@ describe('AdoptButton', () => {
   it('renders and calls sendRequest on click', () => {
     const mockSendRequest = vi.fn();
 
-    // Override mocked hook for this test
+    // @ts-expect-error Zustand selector mocking
     (useAdoptionRequestStore as vi.Mock).mockImplementation((selector) =>
       selector({
         sendRequest: mockSendRequest,
