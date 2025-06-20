@@ -22,9 +22,11 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     setError('');
 
     try {
@@ -51,6 +53,8 @@ const RegisterPage = () => {
         setError('An unexpected error occurred.');
         toast.error('An unexpected error occurred.');
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -103,8 +107,15 @@ const RegisterPage = () => {
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
-          <Button type="submit" variant="form">
-            Register
+          <Button
+            type="submit"
+            variant="form"
+            disabled={isLoading}
+            className={`w-full ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            {isLoading ? '🔄 Registering...' : 'Register'}
           </Button>
         </form>
       </div>

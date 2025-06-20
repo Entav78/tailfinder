@@ -23,6 +23,7 @@ import { NOROFF_API_KEY } from '@/constants/api';
 const ManagePetPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState<Pet>({
     id: '',
@@ -42,11 +43,11 @@ const ManagePetPage = () => {
     },
   });
 
-  const [loading, setLoading] = useState(false);
+  //const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!id) return;
-    setLoading(true);
+    setIsLoading(true);
 
     fetch(getPetByIdUrl(id))
       .then((res) => res.json())
@@ -58,7 +59,7 @@ const ManagePetPage = () => {
         }
       })
       .catch(() => toast.error('Something went wrong'))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false)); // 👈 ikke setLoading
   }, [id]);
 
   const handleChange = (
@@ -73,7 +74,7 @@ const ManagePetPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
 
     const url = id ? getPetByIdUrl(id) : getPetsUrl();
     const method = id ? 'PUT' : 'POST';
@@ -113,7 +114,7 @@ const ManagePetPage = () => {
         toast.error(err.message);
       }
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -316,10 +317,18 @@ const ManagePetPage = () => {
           <Button
             type="submit"
             variant="primary"
-            isLoading={loading}
-            disabled={loading}
+            disabled={isLoading}
+            className={`w-full ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           >
-            {id ? 'Update Pet' : 'Add Pet'}
+            {isLoading
+              ? id
+                ? '🔄 Updating Pet...'
+                : '🔄 Adding Pet...'
+              : id
+              ? 'Update Pet'
+              : 'Add Pet'}
           </Button>
 
           {id && (

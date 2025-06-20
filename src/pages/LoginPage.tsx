@@ -26,10 +26,12 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     try {
       const response = await fetch(getLoginUrl(), {
@@ -64,6 +66,8 @@ const LoginPage = () => {
         setError('Something went wrong');
         toast.error('Something went wrong');
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -102,8 +106,15 @@ const LoginPage = () => {
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
-          <Button type="submit" variant="form">
-            Login
+          <Button
+            type="submit"
+            variant="form"
+            disabled={isLoading}
+            className={`w-full ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            {isLoading ? '🔄 Logging in...' : 'Login'}
           </Button>
         </form>
       </div>
