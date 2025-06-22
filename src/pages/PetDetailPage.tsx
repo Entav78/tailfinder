@@ -64,7 +64,7 @@ const PetDetailPage = () => {
           <img
             src={image.url}
             alt={image.alt || `${name} the ${breed}`}
-            className="w-full h-64 object-cover"
+            className="w-full h-auto max-h-[400px] object-cover rounded-t"
           />
         ) : (
           <div className="w-full h-64 bg-border-light dark:bg-border-dark flex items-center justify-center text-text-placeholder">

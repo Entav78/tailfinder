@@ -150,110 +150,110 @@ const Header = () => {
             Logged in as <span className="font-semibold ml-1">{user.name}</span>
           </div>
         )}
-      </header>
 
-      {/* ✅ Mobile Menu */}
-      <div
-        id="mobile-menu"
-        className={`fixed top-0 right-0 h-full w-full bg-header text-white shadow-lg transform transition-transform duration-300 z-50 sm:hidden ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex justify-between items-center px-4 pt-6 pb-4 border-b border-white">
-          <span className="text-lg font-semibold">Menu</span>
-          <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
-            <svg
-              className="w-8 h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
+        {/* ✅ Mobile Menu */}
+        <div
+          id="mobile-menu"
+          className={`fixed top-0 right-0 h-full w-full bg-header text-white shadow-lg transform transition-transform duration-300 z-50 sm:hidden ${
+            menuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex justify-between items-center px-4 pt-6 pb-4 border-b border-white">
+            <span className="text-lg font-semibold">Menu</span>
+            <button onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
 
-        <ul className="flex flex-col gap-4 p-4">
-          <li>
-            <Link
-              to="/"
-              onClick={() => setMenuOpen(false)}
-              className={menuLinkClass}
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/profile"
-              onClick={() => setMenuOpen(false)}
-              className={menuLinkClass}
-            >
-              Profile
-              {isLoggedIn && alertCount > 0 && (
-                <span className="absolute -top-2 -right-4 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                  {alertCount}
-                </span>
-              )}
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/manage"
-              onClick={() => setMenuOpen(false)}
-              className={menuLinkClass}
-            >
-              Manage
-            </Link>
-          </li>
-
-          {accessToken ? (
+          <ul className="flex flex-col gap-4 p-4">
             <li>
-              <LogoutButton
-                onClickDone={() => setMenuOpen(false)}
+              <Link
+                to="/"
+                onClick={() => setMenuOpen(false)}
                 className={menuLinkClass}
-              />
+              >
+                Home
+              </Link>
             </li>
-          ) : (
-            <>
-              <li>
-                <Link
-                  to="/login"
-                  onClick={() => setMenuOpen(false)}
-                  className={menuLinkClass}
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/register"
-                  onClick={() => setMenuOpen(false)}
-                  className={menuLinkClass}
-                >
-                  Register
-                </Link>
-              </li>
-            </>
-          )}
-
-          <li className="pt-4 border-t border-white">
-            <ThemeToggle onClickDone={() => setMenuOpen(false)} />
-          </li>
-
-          {/* ✅ Logged in user (mobile) */}
-          {user?.name && (
-            <li className="pt-2 text-sm text-gray-300">
-              Logged in as <span className="font-semibold">{user.name}</span>
+            <li>
+              <Link
+                to="/profile"
+                onClick={() => setMenuOpen(false)}
+                className={menuLinkClass}
+              >
+                Profile
+                {isLoggedIn && alertCount > 0 && (
+                  <span className="absolute -top-2 -right-4 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    {alertCount}
+                  </span>
+                )}
+              </Link>
             </li>
-          )}
-        </ul>
-      </div>
+            <li>
+              <Link
+                to="/manage"
+                onClick={() => setMenuOpen(false)}
+                className={menuLinkClass}
+              >
+                Manage
+              </Link>
+            </li>
+
+            {accessToken ? (
+              <li>
+                <LogoutButton
+                  onClickDone={() => setMenuOpen(false)}
+                  className={menuLinkClass}
+                />
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                    className={menuLinkClass}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    onClick={() => setMenuOpen(false)}
+                    className={menuLinkClass}
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+
+            <li className="pt-4 border-t border-white">
+              <ThemeToggle onClickDone={() => setMenuOpen(false)} />
+            </li>
+
+            {/* ✅ Logged in user (mobile) */}
+            {user?.name && (
+              <li className="pt-2 text-sm text-gray-300">
+                Logged in as <span className="font-semibold">{user.name}</span>
+              </li>
+            )}
+          </ul>
+        </div>
+      </header>
     </>
   );
 };

@@ -4,7 +4,7 @@ Welcome to **TailFinder**, a user-friendly frontend application that lets users 
 
 ---
 
-## Table of Contents  📄 
+## Table of Contents  📄
 
 * [Demo](#demo)
 * [Features](#features)
@@ -119,6 +119,35 @@ Users can choose to reveal all images by clicking the “Reveal All Images” bu
 
 ---
 
+## ♿ Accessibility
+
+This project includes automated accessibility checks during development using [`@axe-core/react`](https://www.npmjs.com/package/@axe-core/react).
+
+* Axe is only enabled in development mode (`import.meta.env.DEV`)
+* It runs in the browser console and logs any accessibility issues
+* Examples of issues it helps detect:
+  * Missing `<h1>` heading on pages
+  * Content not wrapped in landmark regions (e.g. `<main>`, `<header>`, `<footer>`)
+  * Insufficient color contrast
+  * Incorrect ARIA usage
+
+All pages have been tested and currently pass axe-core accessibility checks with **no violations**.
+
+---
+
+## 🎨 Design Planning (Figma)
+
+All UI design and color planning were created in Figma before implementation.  
+The design includes:
+
+* A full Tailwind-based color guide for both light and dark mode
+* Desktop and mobile layouts for all main pages
+* Accessibility-conscious features such as image hiding and contrast checks
+
+[View Figma Design File](https://www.figma.com/design/ 1dg5mSEpAAcYFcVzZs2dRq/Tailfinder?node-id=0-1&t=n0bDI00OfcwRSWdG-1)
+
+---
+
 ## Author
 
 **Hilde-Kathrine**
@@ -134,5 +163,5 @@ Frontend Student @ Noroff
 
 ## Credits
 
-- Guidance and technical assistance provided by ChatGPT (OpenAI), used as a development assistant during the project.
-- Thanks for helping debug species filters, toggle dark mode, and keep the fun alive with Spider-Man jokes.
+* Guidance and technical assistance provided by ChatGPT (OpenAI), used as a development assistant during the project.
+* Thanks for helping debug species filters, toggle dark mode, and keep the fun alive with Spider-Man jokes.

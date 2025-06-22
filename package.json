@@ -12,6 +12,7 @@
     "test:ui": "vitest"
   },
   "dependencies": {
+    "@axe-core/react": "^4.10.2",
     "@heroicons/react": "^2.2.0",
     "classnames": "^2.5.1",
     "react": "^19.1.0",
