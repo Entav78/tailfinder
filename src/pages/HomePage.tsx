@@ -129,6 +129,11 @@ const HomePage = () => {
         </Button>
       </div>
 
+      {paginatedPets.length === 0 && (
+        <p className="text-center text-sm text-gray-600 dark:text-gray-300 mt-4">
+          No pets found matching your search.
+        </p>
+      )}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {paginatedPets.map((pet) => (
           <PetCard key={pet.id} pet={pet} />
