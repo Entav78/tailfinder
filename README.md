@@ -137,14 +137,14 @@ All pages have been tested and currently pass axe-core accessibility checks with
 
 ## 🎨 Design Planning (Figma)
 
-All UI design and color planning were created in Figma before implementation.  
+All UI design and color planning were created in Figma as part of the project documentation.  
 The design includes:
 
 * A full Tailwind-based color guide for both light and dark mode
 * Desktop and mobile layouts for all main pages
 * Accessibility-conscious features such as image hiding and contrast checks
 
-[View Figma Design File](https://www.figma.com/design/ 1dg5mSEpAAcYFcVzZs2dRq/Tailfinder?node-id=0-1&t=n0bDI00OfcwRSWdG-1)
+[View Figma Design File](https://www.figma.com/design/1dg5mSEpAAcYFcVzZs2dRq/Tailfinder?node-id=0-1&t=n0bDI00OfcwRSWdG-1)
 
 ---
 
