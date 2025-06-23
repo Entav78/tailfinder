@@ -120,7 +120,7 @@ const ManagePetPage = () => {
 
   return (
     <section className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">
+      <h1 className="text-2xl font-bold mb-4 text-center">
         {id ? 'Edit Pet' : 'Add New Pet'}
       </h1>
 

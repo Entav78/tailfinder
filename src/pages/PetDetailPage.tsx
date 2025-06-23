@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/authStore';
 import { usePetStore } from '@/store/petStore';
 import { AdoptButton } from '@/components/Buttons/AdoptButton/AdoptButton';
 import { findRequesterName } from '@/utils/findRequesterName';
+import { toast } from 'react-hot-toast';
 
 /**
  * @component PetDetailPage
@@ -57,6 +58,13 @@ const PetDetailPage = () => {
   const ownerCheck = isOwner(updatedPet, currentUser);
   const isAdopted = adoptionStatus === 'Adopted';
 
+  const handleShare = (petId: string) => {
+    const shareUrl = `${window.location.origin}/pets/${petId}`;
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      toast.success('Link copied to clipboard!');
+    });
+  };
+
   return (
     <section className="max-w-3xl mx-auto p-4">
       <div className="bg-card dark:bg-darkCard shadow rounded-lg">
@@ -73,9 +81,19 @@ const PetDetailPage = () => {
         )}
 
         <div className="p-6 bg-card dark:bg-darkCard rounded shadow">
-          <h1 className="text-3xl font-bold mb-2 text-text-base dark:text-text-base-dark">
-            {name}
-          </h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-3xl font-bold text-text-base dark:text-text-base-dark">
+              {name}
+            </h1>
+            <button
+              onClick={() => handleShare(updatedPet.id)}
+              className="text-sm text-header hover:underline inline-flex items-center gap-1 px-2 py-2 min-w-[44px] min-h-[44px] rounded transition dark:text-text-base-dark"
+              title="Copy link to this pet"
+            >
+              <span>🔗</span>
+              <span>Copy Link</span>
+            </button>
+          </div>
 
           <p className="text-text-muted dark:text-text-subtle mb-1">
             <strong>Species:</strong> {species}

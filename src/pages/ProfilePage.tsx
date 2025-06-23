@@ -27,7 +27,7 @@ const ProfilePage = () => {
 
   return (
     <section className="max-w-3xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Profile</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Your Profile</h1>
 
       {user && (
         <div className="mb-6 text-sm text-text-base dark:text-text-base-dark">
