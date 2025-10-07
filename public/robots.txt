@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Don’t index auth-only pages
+Disallow: /login
+Disallow: /register
+Disallow: /profile
+
+Sitemap: https://tailfinder.netlify.app/sitemap.xml
