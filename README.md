@@ -148,6 +148,23 @@ The design includes:
 
 ---
 
+## 🧹 Portfolio 2 polish (2025)
+
+Small, high‑impact improvements made while preparing the portfolio:
+
+### 1) Better SEO & share previews
+
+* Added **`public/robots.txt`** (whitelists everything).
+* Added **`public/sitemap.xml`** with canonical `<loc>` entries.
+* Added **Open Graph / Twitter** meta tags in `index.html`.
+
+### 2) Accessibility & UX
+
+* Verified visible focus, labels on filters, and clearer link text.
+* Confirmed images remain opt‑in on the home page.
+
+---
+
 ## Author
 
 **Hilde-Kathrine**
